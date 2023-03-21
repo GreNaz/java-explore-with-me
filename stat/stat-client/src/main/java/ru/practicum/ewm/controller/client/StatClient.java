@@ -23,6 +23,8 @@ public class StatClient extends BaseClient {
     private static final String HIT_ENDPOINT = "/hit";
     private static final String STATS_ENDPOINT = "/stats";
 
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     @Autowired
     public StatClient(@Value("${ewm-service.url}") String serverUrl,
                       RestTemplateBuilder builder) {
@@ -39,15 +41,15 @@ public class StatClient extends BaseClient {
                                           List<String> uris,
                                           boolean unique) {
 
-        if (uris.isEmpty()) {
+        if (uris.isEmpty() || uris == null) {
             return ResponseEntity.accepted().body(Collections.emptyList());
         } else {
 
             String paramsUri = uris.stream().reduce("", (result, uri) -> uri + "," + result);
 
             Map<String, Object> parameters = Map.of(
-                    "start", start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
-                    "end", end.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
+                    "start", start.format(FORMATTER),
+                    "end", end.format(FORMATTER),
                     "uris", paramsUri,
                     "unique", unique);
 

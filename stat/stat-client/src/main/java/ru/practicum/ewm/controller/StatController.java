@@ -1,18 +1,23 @@
 package ru.practicum.ewm.controller;
 
 import dto.EndpointHitDTO;
+import io.micrometer.core.lang.Nullable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.practicum.ewm.controller.client.StatClient;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class StatController {
 
@@ -34,7 +39,7 @@ public class StatController {
             @RequestParam LocalDateTime start,
             @RequestParam LocalDateTime end,
             // Список uri для которых нужно выгрузить статистику
-            @RequestParam(required = false) List<String> uris,
+            @RequestParam(required = false) @Nullable List<String> uris,
             // Нужно ли учитывать только уникальные посещения (только с уникальным ip)
             @RequestParam(defaultValue = "false") boolean unique) {
         return client.getStat(start, end, uris, unique);

@@ -28,6 +28,9 @@ public class StatServiceImpl implements StatService {
                                       LocalDateTime end,
                                       List<String> uris,
                                       boolean unique) {
+        if (uris.isEmpty()) {
+            return List.of();
+        }
         if (unique) {
             return repository.getStatsUnique(start, end, uris).stream()
                     .map(ViewStatsMapper::toViewStatsDTO)
