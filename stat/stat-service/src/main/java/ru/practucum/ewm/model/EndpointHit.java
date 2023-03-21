@@ -3,7 +3,6 @@ package ru.practucum.ewm.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.net.URI;
 import java.time.LocalDateTime;
 
 @Getter
