@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.practucum.ewm.model.EndpointHit;
 
 @Repository
-public interface StatRepository extends JpaRepository<EndpointHit, Integer> {
+public interface StatRepository extends JpaRepository<EndpointHit, Integer>, ViewStatsSearchDao {
 }

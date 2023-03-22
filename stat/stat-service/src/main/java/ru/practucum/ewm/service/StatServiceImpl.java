@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practucum.ewm.model.EndpointHitMapper;
 import ru.practucum.ewm.repository.StatRepository;
-import ru.practucum.ewm.repository.ViewStatsSearchDao;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.List;
 @Service
 public class StatServiceImpl implements StatService {
     private final StatRepository repository;
-    private final ViewStatsSearchDao viewStatsSearchDao;
 
     @Override
     public EndpointHitDTO save(EndpointHitDTO endpointHitDTO) {
@@ -28,6 +26,6 @@ public class StatServiceImpl implements StatService {
                                       LocalDateTime end,
                                       List<String> uris,
                                       boolean unique) {
-        return viewStatsSearchDao.getStats(start, end, uris, unique);
+        return repository.getStats(start, end, uris, unique);
     }
 }
