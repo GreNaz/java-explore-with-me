@@ -28,15 +28,6 @@ public class StatServiceImpl implements StatService {
                                       LocalDateTime end,
                                       List<String> uris,
                                       boolean unique) {
-//        if (unique) {
-//            return repository.getStatsUnique(start, end, uris).stream()
-//                    .map(ViewStatsMapper::toViewStatsDTO)
-//                    .collect(Collectors.toList());
-//        } else {
-//            return repository.getStatsNotUnique(start, end, uris).stream()
-//                    .map(ViewStatsMapper::toViewStatsDTO)
-//                    .collect(Collectors.toList());
-//        }
         return viewStatsSearchDao.getStats(start, end, uris, unique);
     }
 }
