@@ -1,4 +1,4 @@
-package ru.practicum.ewm.controller.client;
+package ru.practicum.ewm.client;
 
 import dto.EndpointHitDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,6 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -41,19 +40,14 @@ public class StatClient extends BaseClient {
                                           List<String> uris,
                                           boolean unique) {
 
-        if (uris.isEmpty() || uris == null) {
-            return ResponseEntity.accepted().body(Collections.emptyList());
-        } else {
+        String paramsUri = uris.stream().reduce("", (result, uri) -> uri + "," + result);
 
-            String paramsUri = uris.stream().reduce("", (result, uri) -> uri + "," + result);
+        Map<String, Object> parameters = Map.of(
+                "start", start.format(FORMATTER),
+                "end", end.format(FORMATTER),
+                "uris", paramsUri,
+                "unique", unique);
 
-            Map<String, Object> parameters = Map.of(
-                    "start", start.format(FORMATTER),
-                    "end", end.format(FORMATTER),
-                    "uris", paramsUri,
-                    "unique", unique);
-
-            return get(STATS_ENDPOINT + "?start={start}&end={end}&uris={uris}&unique={unique}", parameters);
-        }
+        return get(STATS_ENDPOINT + "?start={start}&end={end}&uris={uris}&unique={unique}", parameters);
     }
 }
