@@ -2,7 +2,9 @@ package ru.practicum.ewm.model;
 
 import javax.validation.constraints.NotNull;
 
-//Подборка событий
+/**
+ * Подборка событий
+ */
 public class CompilationDto {
     private EventShortDto events;
     @NotNull

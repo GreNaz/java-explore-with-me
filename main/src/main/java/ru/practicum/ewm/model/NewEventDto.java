@@ -3,7 +3,9 @@ package ru.practicum.ewm.model;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-//Новое событие
+/**
+ * Новое событие
+ */
 public class NewEventDto {
     private String annotation; //Краткое описание события
     @NotNull

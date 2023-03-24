@@ -2,7 +2,6 @@ package ru.practicum.ewm.model;
 
 import java.time.LocalDateTime;
 
-//Заявка на участие в событии
 public class ParticipationRequestDto {
     private Integer id; // Идентификатор заявки
     private LocalDateTime created; // Дата и время создания заявки

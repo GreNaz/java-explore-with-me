@@ -2,9 +2,11 @@ package ru.practicum.ewm.model;
 
 import javax.validation.constraints.NotBlank;
 
-//Категория
+/**
+ * Категория
+ */
 public class CategoryDto {
     private Integer id; //Идентификатор категории
-    @NotBlank(message = "Name can not be blank")
+    @NotBlank
     private String name; //Название категории
 }

@@ -1,8 +1,11 @@
 package ru.practicum.ewm.model;
 
 import java.time.LocalDateTime;
-
-//Данные для изменения информации о событии. Если поле в запросе не указано (равно null) - значит изменение этих данных не треубется.
+/**
+ * Данные для изменения информации о событии.
+ * Если поле в запросе не указано (равно null)
+ * - значит изменение этих данных не треубется.
+ */
 public class UpdateEventAdminRequest {
     private String annotation; // Новая аннотация
     private CategoryDto category; // Новая категория
