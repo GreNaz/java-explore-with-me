@@ -1,10 +1,12 @@
-package ru.practicum.ewm.controller;
+package ru.practicum.ewm.controller.compilations;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.model.CompilationDto;
+
+import java.util.List;
 
 /**
  * Публичный API для работы с подборками событий
@@ -21,10 +23,10 @@ public class CompilationsController {
      * возвращает пустой список
      */
     @GetMapping
-    CompilationDto getCompilations(
+    List<CompilationDto> getCompilations(
             @RequestParam(required = false) Boolean pinned,
-            @RequestParam(required = false) Integer from,
-            @RequestParam(required = false) Integer size
+            @RequestParam(defaultValue = "0") Integer from,
+            @RequestParam(defaultValue = "10") Integer size
     ) {
         return null;
     }
