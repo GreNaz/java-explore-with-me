@@ -1,9 +1,7 @@
 package ru.practicum.ewm.controller.events;
 
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.model.EventFullDto;
-import ru.practicum.ewm.model.EventShortDto;
-import ru.practicum.ewm.model.NewEventDto;
+import ru.practicum.ewm.model.*;
 
 import java.util.List;
 
@@ -34,8 +32,9 @@ public class EventsPrivateController {
     /**
      * Добавление нового события
      * Обратите внимание: дата и время на которые намечено событие не может быть раньше, чем через два часа от текущего момента
+     *
      * @param newEventDto данные добавляемого события
-     * @param userId id текущего пользователя
+     * @param userId      id текущего пользователя
      * @return 201 - Событие добавлено EventFullDto
      * 400 - Запрос составлен некорректно ApiError
      * 409 - Событие не удовлетворяет правилам создания ApiError
@@ -44,6 +43,83 @@ public class EventsPrivateController {
     EventFullDto setEvent(
             @RequestBody NewEventDto newEventDto,
             @PathVariable Integer userId
+    ) {
+        return null;
+    }
+
+    /**
+     * Получение полной информации о событии добавленном текущим пользователем
+     *
+     * @param userId  id текущего пользователя
+     * @param eventId id события
+     * @return 200 - Событие найдено
+     * 400 - Запрос составлен некорректно ApiError
+     * 404 - Событие не найдено или недоступно ApiError
+     */
+    @GetMapping("{eventId}")
+    EventFullDto getEvent(
+            @PathVariable Integer userId,
+            @PathVariable Integer eventId
+    ) {
+        return null;
+    }
+
+    /**
+     * @param userId                 id текущего пользователя
+     * @param eventId                id события
+     * @param updateEventUserRequest Новые данные события
+     * @return 200 - Событие обновлено EventFullDto
+     * 400 - Запрос составлен некорректно ApiError
+     * 404 - Событие не найдено или недоступно ApiError
+     * 409 - Событие не удовлетворяет правилам редактирования ApiError
+     */
+    @PatchMapping("{eventId}")
+    EventFullDto updateEvent(
+            @PathVariable Integer userId,
+            @PathVariable Integer eventId,
+            @RequestBody UpdateEventUserRequest updateEventUserRequest
+    ) {
+        return null;
+    }
+
+    /**
+     * В случае, если по заданным фильтрам не найдено ни одной заявки, возвращает пустой список
+     *
+     * @param userId  id текущего пользователя
+     * @param eventId id события
+     * @return 200 - Найдены запросы на участие List<ParticipationRequestDto>
+     * 400 - Запрос составлен некорректно ApiError
+     */
+    @GetMapping("{eventId}/requests")
+    List<ParticipationRequestDto> getEventRequests(
+            @PathVariable Integer userId,
+            @PathVariable Integer eventId
+    ) {
+        return null;
+    }
+
+    /**
+     * Изменение статуса (подтверждена, отменена) заявок на участие в событии текущего пользователя
+     * Обратите внимание:
+     * если для события лимит заявок равен 0 или отключена пре-модерация заявок, то подтверждение заявок не требуется
+     * нельзя подтвердить заявку, если уже достигнут лимит по заявкам на данное событие (Ожидается код ошибки 409)
+     * статус можно изменить только у заявок, находящихся в состоянии ожидания (Ожидается код ошибки 409)
+     * если при подтверждении данной заявки, лимит заявок для события исчерпан, то все неподтверждённые заявки необходимо отклонить
+     *
+     * @param eventRequestStatusUpdateRequest Новый статус для заявок на участие в событии текущего пользователя
+     * @param userId                          id текущего пользователя
+     * @param eventId                         id события текущего пользователя
+     * @return 200 - Статус заявок изменён EventRequestStatusUpdateResult
+     * 400 - Запрос составлен некорректно ApiError
+     * 404 - Событие не найдено или недоступно ApiError
+     * 409 - Достигнут лимит одобренных заявок ApiError
+     */
+
+    @PatchMapping("{eventId}/requests")
+    EventRequestStatusUpdateResult updateEventStatusRequest(
+            @RequestBody EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest,
+            @PathVariable Integer userId,
+            @PathVariable Integer eventId
     ) {
         return null;
     }
