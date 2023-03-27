@@ -1,17 +1,13 @@
-package ru.practicum.ewm.model;
+package ru.practicum.ewm.model.users;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 /**
- * Пользователь
+ * Пользователь cокращенное
  */
-public class UserDto {
+public class UserShortDto {
     @NotNull
     private Integer id;
     @NotBlank
     private String name;
-    @Email
-    private String email;
 }

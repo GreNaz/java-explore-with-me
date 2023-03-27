@@ -1,4 +1,4 @@
-package ru.practicum.ewm.model;
+package ru.practicum.ewm.model.requests;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.ewm.model.EventFullDto;
-import ru.practicum.ewm.model.EventShortDto;
+import ru.practicum.ewm.model.events.EventFullDto;
+import ru.practicum.ewm.model.events.EventShortDto;
 
 import java.util.List;
 

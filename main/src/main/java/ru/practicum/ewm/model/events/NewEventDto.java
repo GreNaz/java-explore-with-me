@@ -1,4 +1,6 @@
-package ru.practicum.ewm.model;
+package ru.practicum.ewm.model.events;
+
+import ru.practicum.ewm.model.Location;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;

@@ -1,13 +1,15 @@
-package ru.practicum.ewm.model;
+package ru.practicum.ewm.model.events;
+
+import ru.practicum.ewm.model.categories.CategoryDto;
+import ru.practicum.ewm.model.Location;
 
 import java.time.LocalDateTime;
-
 /**
  * Данные для изменения информации о событии.
  * Если поле в запросе не указано (равно null)
  * - значит изменение этих данных не треубется.
  */
-public class UpdateEventUserRequest {
+public class UpdateEventAdminRequest {
     private String annotation; // Новая аннотация
     private CategoryDto category; // Новая категория
     private String description; //  Новое описание
@@ -16,6 +18,6 @@ public class UpdateEventUserRequest {
     private Boolean paid; //  Новое значение флага о платности мероприятия
     private Integer participantLimit; //  Новый лимит пользователей
     private Boolean requestModeration; //  Нужна ли пре-модерация заявок на участие
-    private String stateAction; //  Новое состояние события SEND_TO_REVIEW, CANCEL_REVIEW
+    private String stateAction; //  Новое состояние события PUBLISH_EVENT, REJECT_EVENT
     private String title; //  Новый заголовок
 }

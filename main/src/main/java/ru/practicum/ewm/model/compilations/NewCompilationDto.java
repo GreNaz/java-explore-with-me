@@ -1,4 +1,4 @@
-package ru.practicum.ewm.model;
+package ru.practicum.ewm.model.compilations;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;

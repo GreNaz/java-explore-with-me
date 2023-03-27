@@ -1,4 +1,4 @@
-package ru.practicum.ewm.model;
+package ru.practicum.ewm.model.compilations;
 /**
  * Изменение информации о подборке событий.
  * Если поле в запросе не указано (равно null)

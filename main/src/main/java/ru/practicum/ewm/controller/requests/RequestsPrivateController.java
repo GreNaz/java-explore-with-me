@@ -1,7 +1,7 @@
 package ru.practicum.ewm.controller.requests;
 
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.model.ParticipationRequestDto;
+import ru.practicum.ewm.model.requests.ParticipationRequestDto;
 
 import java.util.List;
 

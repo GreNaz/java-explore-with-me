@@ -1,4 +1,6 @@
-package ru.practicum.ewm.model;
+package ru.practicum.ewm.model.compilations;
+
+import ru.practicum.ewm.model.events.EventShortDto;
 
 import javax.validation.constraints.NotNull;
 

@@ -2,8 +2,8 @@ package ru.practicum.ewm.controller.categories;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.model.CategoryDto;
-import ru.practicum.ewm.model.NewCategoryDto;
+import ru.practicum.ewm.model.categories.CategoryDto;
+import ru.practicum.ewm.model.categories.NewCategoryDto;
 
 @RestController("/admin/categories")
 public class CategoriesAdminController {
