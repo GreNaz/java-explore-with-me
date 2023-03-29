@@ -1,9 +1,6 @@
 package ru.practicum.ewm.controller.events;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.events.EventFullDto;
 import ru.practicum.ewm.model.events.EventShortDto;
 
@@ -12,7 +9,9 @@ import java.util.List;
 /**
  * Публичный API для работы с событиями
  */
-@RestController("/events")
+@RestController
+@RequestMapping("/events")
+
 public class EventsController {
 
     /**

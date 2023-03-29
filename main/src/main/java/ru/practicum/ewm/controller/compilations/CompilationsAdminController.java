@@ -9,7 +9,8 @@ import ru.practicum.ewm.model.compilations.UpdateCompilationRequest;
 /**
  * API для работы с подборками событий
  */
-@RestController("/admin/compilations")
+@RestController
+@RequestMapping("/admin/compilations")
 public class CompilationsAdminController {
     /**
      * @param newCompilationDto данные новой подборки

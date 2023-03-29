@@ -9,7 +9,8 @@ import java.util.List;
 /**
  * API для работы с событиями
  */
-@RestController("/admin/events")
+@RestController
+@RequestMapping("/admin/events")
 public class EventsAdminController {
 
     /**

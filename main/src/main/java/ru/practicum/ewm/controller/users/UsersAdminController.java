@@ -10,9 +10,10 @@ import java.util.List;
 /**
  * API для работы с пользователями
  */
-@RestController("/admin/users")
-public class UsersAdminController {
+@RestController
+@RequestMapping("/admin/users")
 
+public interface UsersAdminController {
     /**
      * Возвращает информацию обо всех пользователях (учитываются параметры ограничения выборки),
      * либо о конкретных (учитываются указанные идентификаторы)
@@ -30,9 +31,7 @@ public class UsersAdminController {
             @RequestParam List<Integer> ids,
             @RequestParam(defaultValue = "0") Integer from,
             @RequestParam(defaultValue = "10") Integer size
-    ) {
-        return null;
-    }
+    );
 
     /**
      * @param newUserRequest Данные добавляемого пользователя
@@ -42,9 +41,7 @@ public class UsersAdminController {
      */
     @PostMapping
     UserDto setUser(
-            @RequestBody NewUserRequest newUserRequest) {
-        return null;
-    }
+            @RequestBody NewUserRequest newUserRequest);
 
     /**
      * @param userId id пользователя
@@ -53,7 +50,5 @@ public class UsersAdminController {
      */
     @DeleteMapping("{userId}")
     HttpStatus deleteUser(
-            @PathVariable Integer userId) {
-        return null;
-    }
+            @PathVariable Integer userId);
 }

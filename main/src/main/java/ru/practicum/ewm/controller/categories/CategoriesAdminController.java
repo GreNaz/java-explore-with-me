@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.categories.CategoryDto;
 import ru.practicum.ewm.model.categories.NewCategoryDto;
 
-@RestController("/admin/categories")
+@RestController
+@RequestMapping("/admin/categories")
 public class CategoriesAdminController {
 
     /**

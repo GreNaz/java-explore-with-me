@@ -8,7 +8,8 @@ import java.util.List;
 /**
  * Закрытый API для работы с запросами текущего пользователя на участие в событиях
  */
-@RestController("users/{userId}/requests")
+@RestController
+@RequestMapping("users/{userId}/requests")
 public class RequestsPrivateController {
 
     /**
