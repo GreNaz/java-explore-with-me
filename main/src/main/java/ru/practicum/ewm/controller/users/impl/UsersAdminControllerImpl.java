@@ -1,10 +1,11 @@
-package ru.practicum.ewm.controller.users;
+package ru.practicum.ewm.controller.users.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import ru.practicum.ewm.controller.users.UsersAdminController;
 import ru.practicum.ewm.model.users.NewUserRequest;
 import ru.practicum.ewm.model.users.UserDto;
 import ru.practicum.ewm.service.users.UsersService;

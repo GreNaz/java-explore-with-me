@@ -1,4 +1,4 @@
-package ru.practicum.ewm.controller.events;
+package ru.practicum.ewm.controller.events.impl;
 
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.events.*;

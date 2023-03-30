@@ -1,13 +1,19 @@
 package ru.practicum.ewm.controller.categories;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.model.categories.CategoryDto;
 
 import java.util.List;
 
+/**
+ * Публичный API для работы с категориями
+ */
+
 @RestController
-@RequestMapping("/categories")
-public class CategoriesController {
+public interface CategoriesController {
     /**
      * @param from количество категорий, которые нужно пропустить для формирования текущего набора
      * @param size количество категорий в наборе
@@ -20,9 +26,7 @@ public class CategoriesController {
     List<CategoryDto> getCategories(
             @RequestParam(defaultValue = "0") Integer from,
             @RequestParam(defaultValue = "10") Integer size
-    ) {
-        return null;
-    }
+    );
 
     /**
      * @param catId id категории
@@ -33,7 +37,5 @@ public class CategoriesController {
      */
     @GetMapping("{catId}")
     CategoryDto getCategory(
-            @PathVariable Integer catId) {
-        return null;
-    }
+            @PathVariable Integer catId);
 }

@@ -1,4 +1,4 @@
-package ru.practicum.ewm.controller.compilations;
+package ru.practicum.ewm.controller.compilations.impl;
 
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.compilations.CompilationDto;

@@ -1,4 +1,4 @@
-package ru.practicum.ewm.controller.compilations;
+package ru.practicum.ewm.controller.compilations.impl;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

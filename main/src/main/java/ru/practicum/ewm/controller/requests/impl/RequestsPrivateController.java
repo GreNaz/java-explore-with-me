@@ -1,4 +1,4 @@
-package ru.practicum.ewm.controller.requests;
+package ru.practicum.ewm.controller.requests.impl;
 
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.requests.ParticipationRequestDto;
