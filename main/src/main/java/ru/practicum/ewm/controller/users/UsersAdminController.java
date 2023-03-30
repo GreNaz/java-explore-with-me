@@ -2,6 +2,7 @@ package ru.practicum.ewm.controller.users;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.requests.NewUserRequest;
 import ru.practicum.ewm.model.users.UserDto;
@@ -11,6 +12,8 @@ import java.util.List;
 /**
  * API для работы с пользователями
  */
+
+@Validated
 @RestController
 @RequestMapping("/admin/users")
 public interface UsersAdminController {
@@ -27,7 +30,7 @@ public interface UsersAdminController {
      * 400 - Запрос составлен некорректно ApiError
      */
     @GetMapping()
-    List<UserDto> getUser(
+    List<UserDto> getUsers(
             @RequestParam List<Integer> ids,
             @RequestParam(defaultValue = "0") Integer from,
             @RequestParam(defaultValue = "10") Integer size
