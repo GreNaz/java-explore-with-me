@@ -1,6 +1,7 @@
 package ru.practicum.ewm.controller.users;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.requests.NewUserRequest;
 import ru.practicum.ewm.model.users.UserDto;
@@ -12,7 +13,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/admin/users")
-
 public interface UsersAdminController {
     /**
      * Возвращает информацию обо всех пользователях (учитываются параметры ограничения выборки),
@@ -40,8 +40,7 @@ public interface UsersAdminController {
      * 409 - Нарушение целостности данных ApiError
      */
     @PostMapping
-    UserDto setUser(
-            @RequestBody NewUserRequest newUserRequest);
+    ResponseEntity<UserDto> setUser(@RequestBody NewUserRequest newUserRequest);
 
     /**
      * @param userId id пользователя
@@ -49,6 +48,5 @@ public interface UsersAdminController {
      * 404 - Пользователь не найден или недоступен ApiError
      */
     @DeleteMapping("{userId}")
-    HttpStatus deleteUser(
-            @PathVariable Integer userId);
+    HttpStatus deleteUser(@PathVariable Integer userId);
 }

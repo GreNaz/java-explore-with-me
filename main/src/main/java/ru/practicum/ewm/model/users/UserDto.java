@@ -1,5 +1,7 @@
 package ru.practicum.ewm.model.users;
 
+import lombok.*;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -7,6 +9,11 @@ import javax.validation.constraints.NotNull;
 /**
  * Пользователь
  */
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
     @NotNull
     private Integer id;

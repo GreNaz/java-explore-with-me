@@ -1,13 +1,15 @@
 package ru.practicum.ewm.model.users;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "USERS")
 public class User {
     @Id
