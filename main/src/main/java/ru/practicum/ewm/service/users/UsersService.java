@@ -2,8 +2,9 @@ package ru.practicum.ewm.service.users;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ru.practicum.ewm.model.requests.NewUserRequest;
+import ru.practicum.ewm.model.users.NewUserRequest;
 import ru.practicum.ewm.model.users.UserDto;
 
 import javax.transaction.Transactional;
@@ -17,5 +18,5 @@ public interface UsersService {
 
     List<UserDto> getUsers(List<Integer> ids, Pageable pageable);
 
-    HttpStatus deleteUser(Integer userId);
+    ResponseEntity<Object> deleteUser(Integer userId);
 }

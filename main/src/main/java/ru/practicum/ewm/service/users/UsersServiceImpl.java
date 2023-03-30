@@ -2,9 +2,9 @@ package ru.practicum.ewm.service.users;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ru.practicum.ewm.model.requests.NewUserRequest;
+import ru.practicum.ewm.model.users.NewUserRequest;
 import ru.practicum.ewm.model.users.User;
 import ru.practicum.ewm.model.users.UserDto;
 import ru.practicum.ewm.model.users.UserMapper;
@@ -39,8 +39,8 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public HttpStatus deleteUser(Integer userId) {
+    public ResponseEntity<Object> deleteUser(Integer userId) {
         repository.deleteById(userId);
-        return HttpStatus.NO_CONTENT;
+        return ResponseEntity.noContent().build();
     }
 }

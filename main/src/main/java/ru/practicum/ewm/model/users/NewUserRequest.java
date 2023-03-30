@@ -1,4 +1,4 @@
-package ru.practicum.ewm.model.requests;
+package ru.practicum.ewm.model.users;
 
 import lombok.*;
 
@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * Данные нового пользователя
  */
+
 @Getter
 @Setter
 @Builder

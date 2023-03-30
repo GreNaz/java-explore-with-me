@@ -3,10 +3,9 @@ package ru.practicum.ewm.controller.users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.ewm.model.requests.NewUserRequest;
+import ru.practicum.ewm.model.users.NewUserRequest;
 import ru.practicum.ewm.model.users.UserDto;
 import ru.practicum.ewm.service.users.UsersService;
 
@@ -27,7 +26,7 @@ public class UsersAdminControllerImpl implements UsersAdminController {
         return service.getUsers(ids, pageable);
     }
 
-    public HttpStatus deleteUser(Integer userId) {
+    public ResponseEntity<Object> deleteUser(Integer userId) {
         return service.deleteUser(userId);
     }
 }

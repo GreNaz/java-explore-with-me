@@ -1,10 +1,9 @@
 package ru.practicum.ewm.controller.users;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.model.requests.NewUserRequest;
+import ru.practicum.ewm.model.users.NewUserRequest;
 import ru.practicum.ewm.model.users.UserDto;
 
 import java.util.List;
@@ -51,5 +50,5 @@ public interface UsersAdminController {
      * 404 - Пользователь не найден или недоступен ApiError
      */
     @DeleteMapping("{userId}")
-    HttpStatus deleteUser(@PathVariable Integer userId);
+    ResponseEntity<Object> deleteUser(@PathVariable Integer userId);
 }
