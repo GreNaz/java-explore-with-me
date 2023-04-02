@@ -1,6 +1,6 @@
 package ru.practicum.ewm.controller.users;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.users.NewUserRequest;
@@ -29,11 +29,7 @@ public interface UsersAdminController {
      * 400 - Запрос составлен некорректно ApiError
      */
     @GetMapping()
-    List<UserDto> getUsers(
-            @RequestParam List<Integer> ids,
-            @RequestParam(defaultValue = "0") Integer from,
-            @RequestParam(defaultValue = "10") Integer size
-    );
+    List<UserDto> getUsers(@RequestParam List<Integer> ids, @RequestParam(defaultValue = "0") Integer from, @RequestParam(defaultValue = "10") Integer size);
 
     /**
      * @param newUserRequest Данные добавляемого пользователя
@@ -42,13 +38,15 @@ public interface UsersAdminController {
      * 409 - Нарушение целостности данных ApiError
      */
     @PostMapping
-    ResponseEntity<UserDto> setUser(@RequestBody NewUserRequest newUserRequest);
+    @ResponseStatus(HttpStatus.CREATED)
+    UserDto setUser(@RequestBody NewUserRequest newUserRequest);
 
     /**
      * @param userId id пользователя
-     * @return 204 - Пользователь удален HttpStatus
+     * 204 - Пользователь удален HttpStatus
      * 404 - Пользователь не найден или недоступен ApiError
      */
     @DeleteMapping("{userId}")
-    ResponseEntity<Object> deleteUser(@PathVariable Integer userId);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteUser(@PathVariable Integer userId);
 }

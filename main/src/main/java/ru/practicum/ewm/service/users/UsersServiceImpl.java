@@ -2,7 +2,6 @@ package ru.practicum.ewm.service.users;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.practicum.ewm.model.users.NewUserRequest;
 import ru.practicum.ewm.model.users.User;
@@ -39,8 +38,8 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public ResponseEntity<Object> deleteUser(Integer userId) {
+    public void deleteUser(Integer userId) {
+        //проверить наличие пользователя?
         repository.deleteById(userId);
-        return ResponseEntity.noContent().build();
     }
 }

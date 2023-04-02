@@ -1,6 +1,6 @@
 package ru.practicum.ewm.controller.categories;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.categories.CategoryDto;
 import ru.practicum.ewm.model.categories.NewCategoryDto;
@@ -21,18 +21,15 @@ public interface CategoriesAdminController {
      * 409 - Нарушение целостности данных ApiError
      */
     @PostMapping
-    CategoryDto setCategory(@RequestBody NewCategoryDto newCategoryDto
-    );
+    @ResponseStatus(HttpStatus.CREATED)
+    CategoryDto setCategory(@RequestBody NewCategoryDto newCategoryDto);
 
     /**
      * @param catId id категории
-     * @return с категорией не должно быть связано ни одного события.
-     * 204 - Категория удалена
-     * 404 - Категория не найдена или недоступна ApiError
-     * 409 - Существуют события, связанные с категорией ApiError
      */
     @DeleteMapping("{catId}")
-    ResponseEntity<Object> deleteCategory(@PathVariable Integer catId);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteCategory(@PathVariable Integer catId);
 
     /**
      * @param categoryDto Данные категории для изменения
