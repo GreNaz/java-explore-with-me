@@ -1,4 +1,4 @@
-package ru.practicum.ewm.service.users;
+package ru.practicum.ewm.service.users.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +8,7 @@ import ru.practicum.ewm.model.users.User;
 import ru.practicum.ewm.model.users.dto.UserDto;
 import ru.practicum.ewm.model.users.UserMapper;
 import ru.practicum.ewm.repository.users.UsersRepository;
+import ru.practicum.ewm.service.users.UsersService;
 
 import java.util.List;
 import java.util.stream.Collectors;

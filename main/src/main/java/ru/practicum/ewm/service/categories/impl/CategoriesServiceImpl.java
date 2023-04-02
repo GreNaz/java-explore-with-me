@@ -1,4 +1,4 @@
-package ru.practicum.ewm.service.categories;
+package ru.practicum.ewm.service.categories.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +9,7 @@ import ru.practicum.ewm.model.categories.CategoryMapper;
 import ru.practicum.ewm.model.categories.dto.NewCategoryDto;
 import ru.practicum.ewm.model.errors.NotFoundException;
 import ru.practicum.ewm.repository.categories.CategoriesRepository;
+import ru.practicum.ewm.service.categories.CategoriesService;
 
 import java.util.List;
 import java.util.stream.Collectors;
