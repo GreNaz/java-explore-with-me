@@ -20,18 +20,17 @@ public interface CompilationsAdminController {
      * 409 - Нарушение целостности данных ApiError
      */
     @PostMapping
-    CompilationDto setCompilation(
-            @RequestBody NewCompilationDto newCompilationDto
+    CompilationDto setCompilation(@RequestBody NewCompilationDto newCompilationDto
     );
 
     /**
      * @param compId id подборки
-     * @return 204 - Подборка удалена
-     * 404 - Подборка не найдена или недоступна ApiError
+     *               204 - Подборка удалена
+     *               404 - Подборка не найдена или недоступна ApiError
      */
     @DeleteMapping("{compId}")
-    HttpStatus deleteCompilation(
-            @PathVariable Integer compId);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteCompilation(@PathVariable Integer compId);
 
     /**
      * @param updateCompilationRequest данные для обновления подборки

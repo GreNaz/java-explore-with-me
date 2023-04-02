@@ -1,13 +1,17 @@
 package ru.practicum.ewm.model.compilations;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import ru.practicum.ewm.model.events.Event;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "COMPILATIONS")
 public class Compilation {
     @Id
@@ -18,5 +22,9 @@ public class Compilation {
     private Boolean pinned;
 
     private String title;
+
+    @ManyToMany
+    @JoinColumn(name = "events_id")
+    private List<Event> events;
 
 }

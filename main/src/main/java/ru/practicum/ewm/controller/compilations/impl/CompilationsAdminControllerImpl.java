@@ -1,7 +1,6 @@
 package ru.practicum.ewm.controller.compilations.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.controller.compilations.CompilationsAdminController;
 import ru.practicum.ewm.model.compilations.dto.CompilationDto;
@@ -15,20 +14,17 @@ public class CompilationsAdminControllerImpl implements CompilationsAdminControl
 
     private final CompilationService service;
 
-    public CompilationDto setCompilation(
-            NewCompilationDto newCompilationDto
-    ) {
-        return null;
+    public CompilationDto setCompilation(NewCompilationDto newCompilationDto) {
+        return service.setCompilation(newCompilationDto);
     }
 
-    public HttpStatus deleteCompilation(
-            Integer compId) {
-        return null;
+    public void deleteCompilation(Integer compId) {
+        service.deleteCompilation(compId);
     }
 
     public CompilationDto updateCompilation(
             UpdateCompilationRequest updateCompilationRequest,
             Integer compId) {
-        return null;
+        return service.updateCompilation(updateCompilationRequest, compId);
     }
 }

@@ -1,11 +1,13 @@
 package ru.practicum.ewm.controller.events.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.controller.events.EventsPrivateController;
 import ru.practicum.ewm.model.events.dto.*;
 import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
-import ru.practicum.ewm.service.events.EventService;
+import ru.practicum.ewm.service.events.EventsPrivateService;
 
 import java.util.List;
 
@@ -13,30 +15,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventsPrivateControllerImpl implements EventsPrivateController {
 
-    private final EventService service;
+    private final EventsPrivateService service;
 
     public List<EventShortDto> getEvents(Integer userId, Integer from, Integer size) {
-        return null;
+        Pageable pageable = PageRequest.of(from, size);
+        return service.getEvents(userId, pageable);
     }
 
 
     public EventFullDto setEvent(NewEventDto newEventDto, Integer userId) {
-        return null;
+        return service.setEvent(newEventDto, userId);
     }
 
 
     public EventFullDto getEvent(Integer userId, Integer eventId) {
-        return null;
+        return service.getEvent(userId, eventId);
     }
 
 
     public EventFullDto updateEvent(Integer userId, Integer eventId, UpdateEventUserRequest updateEventUserRequest) {
-        return null;
+        return service.updateEvent(userId, eventId, updateEventUserRequest);
     }
 
 
     public List<ParticipationRequestDto> getEventRequests(Integer userId, Integer eventId) {
-        return null;
+        return service.getEventRequests(userId, eventId);
     }
 
 
@@ -44,6 +47,6 @@ public class EventsPrivateControllerImpl implements EventsPrivateController {
             EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest,
             Integer userId,
             Integer eventId) {
-        return null;
+        return service.updateEventStatusRequest(eventRequestStatusUpdateRequest, userId, eventId);
     }
 }

@@ -1,37 +1,31 @@
-package ru.practicum.ewm.controller.events.impl;
+package ru.practicum.ewm.service.events.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.ewm.controller.events.EventsAdminController;
+import org.springframework.stereotype.Service;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.UpdateEventAdminRequest;
+import ru.practicum.ewm.repository.events.EventsRepository;
 import ru.practicum.ewm.service.events.EventsAdminService;
 
 import java.util.List;
-
-
-@RestController
+@Service
 @RequiredArgsConstructor
-public class EventsAdminControllerImpl implements EventsAdminController {
-
-    private final EventsAdminService service;
-
+public class EventsAdminServiceImpl implements EventsAdminService {
+    private final EventsRepository repository;
+    @Override
     public List<EventFullDto> getEvents(List<Integer> users,
                                         List<Integer> categories,
                                         List<String> states,
                                         String rangeStart,
                                         String rangeEnd,
-                                        Integer from,
-                                        Integer size
-    ) {
-        Pageable pageable = PageRequest.of(from, size);
-        return service.getEvents(users, categories, states, rangeStart, rangeEnd, pageable);
+                                        Pageable pageable) {
+        return null;
     }
 
+    @Override
     public EventFullDto updateEvent(UpdateEventAdminRequest updateEventAdminRequest,
                                     Integer eventId) {
-        return service.updateEvent(updateEventAdminRequest, eventId);
+        return null;
     }
 }

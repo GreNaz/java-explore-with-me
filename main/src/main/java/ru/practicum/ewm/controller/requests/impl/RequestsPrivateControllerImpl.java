@@ -13,21 +13,17 @@ import java.util.List;
 public class RequestsPrivateControllerImpl implements RequestsPrivateController {
     private final RequestsService service;
 
-    public List<ParticipationRequestDto> getRequest(
-            Integer userId) {
-        return null;
+    public List<ParticipationRequestDto> getRequest(Integer userId) {
+        return service.getRequest(userId);
     }
 
-    public ParticipationRequestDto setRequest(
-            Integer eventId,
-            Integer userId
-    ) {
-        return null;
+    public ParticipationRequestDto setRequest(Integer eventId,
+                                              Integer userId) {
+        return service.setRequest(eventId, userId);
     }
 
-    public ParticipationRequestDto updateRequest(
-            Integer userId,
-            Integer requestId) {
-        return null;
+    public ParticipationRequestDto updateRequest(Integer userId,
+                                                 Integer requestId) {
+        return service.updateRequest(userId, requestId);
     }
 }
