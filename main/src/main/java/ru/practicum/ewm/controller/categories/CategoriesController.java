@@ -1,7 +1,7 @@
 package ru.practicum.ewm.controller.categories;
 
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.model.categories.CategoryDto;
+import ru.practicum.ewm.model.categories.dto.CategoryDto;
 
 import java.util.List;
 

@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.practicum.ewm.model.categories.Category;
-import ru.practicum.ewm.model.categories.CategoryDto;
+import ru.practicum.ewm.model.categories.dto.CategoryDto;
 import ru.practicum.ewm.model.categories.CategoryMapper;
-import ru.practicum.ewm.model.categories.NewCategoryDto;
+import ru.practicum.ewm.model.categories.dto.NewCategoryDto;
 import ru.practicum.ewm.model.errors.NotFoundException;
 import ru.practicum.ewm.repository.categories.CategoriesRepository;
 

@@ -1,8 +1,8 @@
 package ru.practicum.ewm.controller.events;
 
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.model.events.EventFullDto;
-import ru.practicum.ewm.model.events.EventShortDto;
+import ru.practicum.ewm.model.events.dto.EventFullDto;
+import ru.practicum.ewm.model.events.dto.EventShortDto;
 
 import java.util.List;
 

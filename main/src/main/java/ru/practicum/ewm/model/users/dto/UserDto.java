@@ -1,20 +1,22 @@
-package ru.practicum.ewm.model.users;
+package ru.practicum.ewm.model.users.dto;
 
 import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
- * Данные нового пользователя
+ * Пользователь
  */
-
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class NewUserRequest {
+@AllArgsConstructor
+public class UserDto {
+    @NotNull
+    private Integer id;
     @NotBlank
     private String name;
     @Email

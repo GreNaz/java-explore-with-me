@@ -1,4 +1,4 @@
-package ru.practicum.ewm.model.events;
+package ru.practicum.ewm.model.events.dto;
 
 import java.util.List;
 

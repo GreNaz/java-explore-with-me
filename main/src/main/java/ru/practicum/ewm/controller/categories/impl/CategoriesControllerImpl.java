@@ -5,7 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.controller.categories.CategoriesController;
-import ru.practicum.ewm.model.categories.CategoryDto;
+import ru.practicum.ewm.model.categories.dto.CategoryDto;
 import ru.practicum.ewm.service.categories.CategoriesService;
 
 import java.util.List;

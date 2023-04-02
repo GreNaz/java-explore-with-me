@@ -1,4 +1,4 @@
-package ru.practicum.ewm.model.compilations;
+package ru.practicum.ewm.model.compilations.dto;
 
 /**
  * Изменение информации о подборке событий.

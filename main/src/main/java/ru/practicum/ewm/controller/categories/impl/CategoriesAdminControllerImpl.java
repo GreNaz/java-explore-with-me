@@ -3,8 +3,8 @@ package ru.practicum.ewm.controller.categories.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.controller.categories.CategoriesAdminController;
-import ru.practicum.ewm.model.categories.CategoryDto;
-import ru.practicum.ewm.model.categories.NewCategoryDto;
+import ru.practicum.ewm.model.categories.dto.CategoryDto;
+import ru.practicum.ewm.model.categories.dto.NewCategoryDto;
 import ru.practicum.ewm.service.categories.CategoriesService;
 
 @RestController

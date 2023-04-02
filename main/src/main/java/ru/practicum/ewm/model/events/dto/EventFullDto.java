@@ -1,8 +1,8 @@
-package ru.practicum.ewm.model.events;
+package ru.practicum.ewm.model.events.dto;
 
 import ru.practicum.ewm.model.Location;
-import ru.practicum.ewm.model.categories.CategoryDto;
-import ru.practicum.ewm.model.users.UserShortDto;
+import ru.practicum.ewm.model.categories.dto.CategoryDto;
+import ru.practicum.ewm.model.users.dto.UserShortDto;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;

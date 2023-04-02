@@ -2,9 +2,9 @@ package ru.practicum.ewm.controller.compilations;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.model.compilations.CompilationDto;
-import ru.practicum.ewm.model.compilations.NewCompilationDto;
-import ru.practicum.ewm.model.compilations.UpdateCompilationRequest;
+import ru.practicum.ewm.model.compilations.dto.CompilationDto;
+import ru.practicum.ewm.model.compilations.dto.NewCompilationDto;
+import ru.practicum.ewm.model.compilations.dto.UpdateCompilationRequest;
 
 /**
  * API для работы с подборками событий

@@ -3,8 +3,8 @@ package ru.practicum.ewm.controller.users;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.model.users.NewUserRequest;
-import ru.practicum.ewm.model.users.UserDto;
+import ru.practicum.ewm.model.users.dto.NewUserRequest;
+import ru.practicum.ewm.model.users.dto.UserDto;
 
 import java.util.List;
 

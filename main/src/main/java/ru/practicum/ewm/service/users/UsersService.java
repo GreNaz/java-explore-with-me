@@ -2,8 +2,8 @@ package ru.practicum.ewm.service.users;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.practicum.ewm.model.users.NewUserRequest;
-import ru.practicum.ewm.model.users.UserDto;
+import ru.practicum.ewm.model.users.dto.NewUserRequest;
+import ru.practicum.ewm.model.users.dto.UserDto;
 
 import javax.transaction.Transactional;
 import java.util.List;

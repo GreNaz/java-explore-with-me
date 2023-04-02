@@ -3,9 +3,9 @@ package ru.practicum.ewm.service.users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.practicum.ewm.model.users.NewUserRequest;
+import ru.practicum.ewm.model.users.dto.NewUserRequest;
 import ru.practicum.ewm.model.users.User;
-import ru.practicum.ewm.model.users.UserDto;
+import ru.practicum.ewm.model.users.dto.UserDto;
 import ru.practicum.ewm.model.users.UserMapper;
 import ru.practicum.ewm.repository.users.UsersRepository;
 

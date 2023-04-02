@@ -1,7 +1,7 @@
 package ru.practicum.ewm.controller.compilations;
 
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.ewm.model.compilations.CompilationDto;
+import ru.practicum.ewm.model.compilations.dto.CompilationDto;
 
 import java.util.List;
 

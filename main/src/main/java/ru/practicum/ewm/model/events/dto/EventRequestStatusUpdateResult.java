@@ -1,6 +1,6 @@
-package ru.practicum.ewm.model.events;
+package ru.practicum.ewm.model.events.dto;
 
-import ru.practicum.ewm.model.requests.ParticipationRequestDto;
+import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
 
 /**
  * Результат подтверждения/отклонения заявок на участие в событии

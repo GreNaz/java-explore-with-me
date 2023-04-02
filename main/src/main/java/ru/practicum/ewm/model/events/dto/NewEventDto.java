@@ -1,4 +1,4 @@
-package ru.practicum.ewm.model.events;
+package ru.practicum.ewm.model.events.dto;
 
 import ru.practicum.ewm.model.Location;
 
