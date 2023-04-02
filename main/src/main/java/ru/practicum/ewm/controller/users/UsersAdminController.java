@@ -43,8 +43,8 @@ public interface UsersAdminController {
 
     /**
      * @param userId id пользователя
-     * 204 - Пользователь удален HttpStatus
-     * 404 - Пользователь не найден или недоступен ApiError
+     *               204 - Пользователь удален HttpStatus
+     *               404 - Пользователь не найден или недоступен ApiError
      */
     @DeleteMapping("{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

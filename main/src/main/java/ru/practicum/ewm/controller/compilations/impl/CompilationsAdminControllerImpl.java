@@ -1,5 +1,6 @@
 package ru.practicum.ewm.controller.compilations.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.controller.compilations.CompilationsAdminController;
@@ -8,6 +9,7 @@ import ru.practicum.ewm.model.compilations.NewCompilationDto;
 import ru.practicum.ewm.model.compilations.UpdateCompilationRequest;
 
 @RestController
+@RequiredArgsConstructor
 public class CompilationsAdminControllerImpl implements CompilationsAdminController {
 
     public CompilationDto setCompilation(

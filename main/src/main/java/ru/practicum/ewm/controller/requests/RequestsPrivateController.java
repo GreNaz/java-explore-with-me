@@ -23,10 +23,9 @@ public interface RequestsPrivateController {
      */
     @GetMapping()
     List<ParticipationRequestDto> getRequest(
-            @PathVariable Integer userId) ;
+            @PathVariable Integer userId);
 
     /**
-     *
      * нельзя добавить повторный запрос (Ожидается код ошибки 409)
      * инициатор события не может добавить запрос на участие в своём событии (Ожидается код ошибки 409)
      * нельзя участвовать в неопубликованном событии (Ожидается код ошибки 409)
@@ -44,7 +43,7 @@ public interface RequestsPrivateController {
     ParticipationRequestDto setRequest(
             @RequestParam Integer eventId,
             @PathVariable Integer userId
-    ) ;
+    );
 
     /**
      * Отмена своего запроса на участие в событии
@@ -57,5 +56,5 @@ public interface RequestsPrivateController {
     @PatchMapping("/{requestId}/cancel")
     ParticipationRequestDto updateRequest(
             @PathVariable Integer userId,
-            @PathVariable Integer requestId) ;
+            @PathVariable Integer requestId);
 }

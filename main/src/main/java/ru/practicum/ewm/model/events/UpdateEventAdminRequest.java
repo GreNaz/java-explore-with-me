@@ -1,9 +1,10 @@
 package ru.practicum.ewm.model.events;
 
-import ru.practicum.ewm.model.categories.CategoryDto;
 import ru.practicum.ewm.model.Location;
+import ru.practicum.ewm.model.categories.CategoryDto;
 
 import java.time.LocalDateTime;
+
 /**
  * Данные для изменения информации о событии.
  * Если поле в запросе не указано (равно null)

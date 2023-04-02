@@ -1,7 +1,6 @@
 package ru.practicum.ewm.service.users;
 
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ru.practicum.ewm.model.users.NewUserRequest;
 import ru.practicum.ewm.model.users.UserDto;

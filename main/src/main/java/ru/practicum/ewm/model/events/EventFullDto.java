@@ -1,7 +1,7 @@
 package ru.practicum.ewm.model.events;
 
-import ru.practicum.ewm.model.categories.CategoryDto;
 import ru.practicum.ewm.model.Location;
+import ru.practicum.ewm.model.categories.CategoryDto;
 import ru.practicum.ewm.model.users.UserShortDto;
 
 import javax.validation.constraints.NotNull;
