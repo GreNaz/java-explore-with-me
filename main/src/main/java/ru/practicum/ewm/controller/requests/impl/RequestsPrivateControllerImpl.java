@@ -1,33 +1,33 @@
 package ru.practicum.ewm.controller.requests.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.controller.requests.RequestsPrivateController;
 import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
+import ru.practicum.ewm.service.requests.RequestsService;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class RequestsPrivateControllerImpl implements RequestsPrivateController {
+    private final RequestsService service;
 
     public List<ParticipationRequestDto> getRequest(
-            @PathVariable Integer userId) {
+            Integer userId) {
         return null;
     }
 
     public ParticipationRequestDto setRequest(
-            @RequestParam Integer eventId,
-            @PathVariable Integer userId
+            Integer eventId,
+            Integer userId
     ) {
         return null;
     }
 
     public ParticipationRequestDto updateRequest(
-            @PathVariable Integer userId,
-            @PathVariable Integer requestId) {
+            Integer userId,
+            Integer requestId) {
         return null;
     }
 }
