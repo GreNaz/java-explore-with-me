@@ -1,4 +1,4 @@
-package ru.practicum.ewm.controller.compilations.impl;
+package ru.practicum.ewm.controller.compilations;
 
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.compilations.CompilationDto;
@@ -10,9 +10,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/compilations")
-
-public class CompilationsController {
-
+public interface CompilationsController {
     /**
      * @param pinned искать только закрепленные/не закрепленные подборки
      * @param from   количество элементов, которые нужно пропустить для формирования текущего набора
@@ -26,9 +24,7 @@ public class CompilationsController {
             @RequestParam(required = false) Boolean pinned,
             @RequestParam(defaultValue = "0") Integer from,
             @RequestParam(defaultValue = "10") Integer size
-    ) {
-        return null;
-    }
+    );
 
     /**
      * @param compId id подборки
@@ -38,9 +34,5 @@ public class CompilationsController {
      * Запрос составлен некорректно - 400 ApiError
      */
     @GetMapping("{compId}")
-    CompilationDto getCompilation(
-            @PathVariable Integer compId) {
-        return null;
-    }
-
+    CompilationDto getCompilation(@PathVariable Integer compId);
 }

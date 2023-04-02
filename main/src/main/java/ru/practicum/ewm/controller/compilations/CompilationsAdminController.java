@@ -1,4 +1,4 @@
-package ru.practicum.ewm.controller.compilations.impl;
+package ru.practicum.ewm.controller.compilations;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,8 @@ import ru.practicum.ewm.model.compilations.UpdateCompilationRequest;
  */
 @RestController
 @RequestMapping("/admin/compilations")
-public class CompilationsAdminController {
+public interface CompilationsAdminController {
+
     /**
      * @param newCompilationDto данные новой подборки
      * @return 201 - Подборка добавлена CompilationDto
@@ -21,9 +22,7 @@ public class CompilationsAdminController {
     @PostMapping
     CompilationDto setCompilation(
             @RequestBody NewCompilationDto newCompilationDto
-    ) {
-        return null;
-    }
+    );
 
     /**
      * @param compId id подборки
@@ -32,20 +31,18 @@ public class CompilationsAdminController {
      */
     @DeleteMapping("{compId}")
     HttpStatus deleteCompilation(
-            @PathVariable Integer compId) {
-        return null;
-    }
+            @PathVariable Integer compId);
 
     /**
      * @param updateCompilationRequest данные для обновления подборки
-     * @param compId id подборки
+     * @param compId                   id подборки
      * @return 200 Подборка обновлена CompilationDto
      * 404 Подборка не найдена или недоступна ApiError
      */
     @PatchMapping("{compId}")
     CompilationDto updateCompilation(
             @RequestBody UpdateCompilationRequest updateCompilationRequest,
-            @PathVariable Integer compId) {
-        return null;
-    }
+            @PathVariable Integer compId);
 }
+
+
