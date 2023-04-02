@@ -1,9 +1,11 @@
 package ru.practicum.ewm.controller.events;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.events.dto.*;
 import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -41,8 +43,9 @@ public interface EventsPrivateController {
      * 409 - Событие не удовлетворяет правилам создания ApiError
      */
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
     EventFullDto setEvent(
-            @RequestBody NewEventDto newEventDto,
+            @Valid @RequestBody NewEventDto newEventDto,
             @PathVariable Integer userId
     );
 

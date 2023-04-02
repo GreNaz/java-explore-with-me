@@ -11,8 +11,8 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class CategoryDto {
     private Integer id; //Идентификатор категории
     @NotBlank

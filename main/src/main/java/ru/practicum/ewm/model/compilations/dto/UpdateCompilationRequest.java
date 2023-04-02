@@ -1,5 +1,7 @@
 package ru.practicum.ewm.model.compilations.dto;
 
+import lombok.*;
+
 import java.util.List;
 
 /**
@@ -7,6 +9,11 @@ import java.util.List;
  * Если поле в запросе не указано (равно null)
  * - значит изменение этих данных не треубется.
  */
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UpdateCompilationRequest {
     private List<Integer> events; // Список id событий подборки для полной замены текущего списка
     private Boolean pinned; // Закреплена ли подборка на главной странице сайта

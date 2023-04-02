@@ -1,5 +1,6 @@
 package ru.practicum.ewm.model.events.dto;
 
+import lombok.*;
 import ru.practicum.ewm.model.Location;
 import ru.practicum.ewm.model.categories.dto.CategoryDto;
 
@@ -10,6 +11,11 @@ import java.time.LocalDateTime;
  * Если поле в запросе не указано (равно null)
  * - значит изменение этих данных не треубется.
  */
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UpdateEventAdminRequest {
     private String annotation; // Новая аннотация
     private CategoryDto category; // Новая категория

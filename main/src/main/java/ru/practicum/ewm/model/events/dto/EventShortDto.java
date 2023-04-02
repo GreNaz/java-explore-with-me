@@ -1,11 +1,16 @@
 package ru.practicum.ewm.model.events.dto;
 
+import lombok.*;
 import ru.practicum.ewm.model.categories.dto.CategoryDto;
 import ru.practicum.ewm.model.users.dto.UserShortDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class EventShortDto {
     private Integer id;
     @NotBlank

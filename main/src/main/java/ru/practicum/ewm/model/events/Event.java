@@ -1,7 +1,6 @@
 package ru.practicum.ewm.model.events;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import ru.practicum.ewm.model.Location;
 import ru.practicum.ewm.model.categories.Category;
 import ru.practicum.ewm.model.users.User;
@@ -12,6 +11,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "EVENTS")
 public class Event {
     @Id

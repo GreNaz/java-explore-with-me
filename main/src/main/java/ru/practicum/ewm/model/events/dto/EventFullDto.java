@@ -1,5 +1,6 @@
 package ru.practicum.ewm.model.events.dto;
 
+import lombok.*;
 import ru.practicum.ewm.model.Location;
 import ru.practicum.ewm.model.categories.dto.CategoryDto;
 import ru.practicum.ewm.model.users.dto.UserShortDto;
@@ -7,6 +8,11 @@ import ru.practicum.ewm.model.users.dto.UserShortDto;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class EventFullDto {
     private Integer id;
     private String annotation; //Краткое описание

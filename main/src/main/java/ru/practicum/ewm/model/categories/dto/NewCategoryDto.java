@@ -11,8 +11,8 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class NewCategoryDto {
     @NotNull
     private String name; //Название категории
