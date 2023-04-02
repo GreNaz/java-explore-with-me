@@ -34,6 +34,5 @@ public interface CategoriesController {
      * 404 - Категория не найдена или недоступна ApiError
      */
     @GetMapping("{catId}")
-    CategoryDto getCategory(
-            @PathVariable Integer catId);
+    CategoryDto getCategory(@PathVariable Integer catId);
 }

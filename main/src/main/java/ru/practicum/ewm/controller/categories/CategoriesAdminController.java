@@ -1,6 +1,7 @@
 package ru.practicum.ewm.controller.categories;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.categories.CategoryDto;
 import ru.practicum.ewm.model.categories.NewCategoryDto;
@@ -10,6 +11,7 @@ import ru.practicum.ewm.model.categories.NewCategoryDto;
  */
 
 @RestController
+@Validated
 @RequestMapping("/admin/categories")
 public interface CategoriesAdminController {
 
@@ -41,5 +43,4 @@ public interface CategoriesAdminController {
      */
     @PatchMapping("{catId}")
     CategoryDto updateCategory(@RequestBody CategoryDto categoryDto, @PathVariable Integer catId);
-
 }

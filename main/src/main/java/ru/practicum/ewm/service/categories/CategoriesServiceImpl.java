@@ -34,7 +34,7 @@ public class CategoriesServiceImpl implements CategoriesService {
     @Override
     public CategoryDto updateCategory(CategoryDto categoryDto, Integer catId) {
         Category category = checkCategoryExist(catId);
-        if (!Objects.isNull(categoryDto.getId()) && !categoryDto.getName().isBlank()) {
+        if (!categoryDto.getName().isBlank()) {
             category.setName(categoryDto.getName());
         }
         return CategoryMapper.toCategoryDto(category);
