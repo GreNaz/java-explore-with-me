@@ -1,4 +1,4 @@
-package ru.practicum.ewm.controller.events.impl;
+package ru.practicum.ewm.controller.events;
 
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.events.EventFullDto;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/admin/events")
-public class EventsAdminController {
+public interface EventsAdminController {
 
     /**
      * Поиск событий
@@ -37,13 +37,11 @@ public class EventsAdminController {
             @RequestParam(required = false) String rangeEnd,
             @RequestParam(defaultValue = "0") Integer from,
             @RequestParam(defaultValue = "10") Integer size
-    ) {
-        return null;
-    }
+    );
 
     /**
      * Редактирование данных события и его статуса (отклонение/публикация).
-     * Редактирование данных любого события администратором. Валидация данных не требуется. 
+     * Редактирование данных любого события администратором. Валидация данных не требуется.
      * дата начала изменяемого события должна быть не ранее чем за час от даты публикации. (Ожидается код ошибки 409)
      * событие можно публиковать, только если оно в состоянии ожидания публикации (Ожидается код ошибки 409)
      * событие можно отклонить, только если оно еще не опубликовано (Ожидается код ошибки 409)
@@ -57,7 +55,5 @@ public class EventsAdminController {
     @PatchMapping("{eventId}")
     EventFullDto updateEvent(
             @RequestBody UpdateEventAdminRequest updateEventAdminRequest,
-            @PathVariable Integer eventId) {
-        return null;
-    }
+            @PathVariable Integer eventId);
 }

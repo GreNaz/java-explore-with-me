@@ -1,4 +1,4 @@
-package ru.practicum.ewm.controller.events.impl;
+package ru.practicum.ewm.controller.events;
 
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.events.*;
@@ -11,7 +11,8 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/users/{userId}/events")
-public class EventsPrivateController {
+public interface EventsPrivateController {
+
     /**
      * Получение событий, добавленных текущим пользователем
      * В случае, если по заданным фильтрам не найдено ни одного события, возвращает пустой список
@@ -27,9 +28,7 @@ public class EventsPrivateController {
             @PathVariable Integer userId,
             @RequestParam(defaultValue = "0") Integer from,
             @RequestParam(defaultValue = "10") Integer size
-    ) {
-        return null;
-    }
+    );
 
     /**
      * Добавление нового события
@@ -45,9 +44,7 @@ public class EventsPrivateController {
     EventFullDto setEvent(
             @RequestBody NewEventDto newEventDto,
             @PathVariable Integer userId
-    ) {
-        return null;
-    }
+    );
 
     /**
      * Получение полной информации о событии добавленном текущим пользователем
@@ -62,9 +59,7 @@ public class EventsPrivateController {
     EventFullDto getEvent(
             @PathVariable Integer userId,
             @PathVariable Integer eventId
-    ) {
-        return null;
-    }
+    );
 
     /**
      * @param userId                 id текущего пользователя
@@ -80,9 +75,7 @@ public class EventsPrivateController {
             @PathVariable Integer userId,
             @PathVariable Integer eventId,
             @RequestBody UpdateEventUserRequest updateEventUserRequest
-    ) {
-        return null;
-    }
+    );
 
     /**
      * В случае, если по заданным фильтрам не найдено ни одной заявки, возвращает пустой список
@@ -96,9 +89,7 @@ public class EventsPrivateController {
     List<ParticipationRequestDto> getEventRequests(
             @PathVariable Integer userId,
             @PathVariable Integer eventId
-    ) {
-        return null;
-    }
+    );
 
     /**
      * Изменение статуса (подтверждена, отменена) заявок на участие в событии текущего пользователя
@@ -122,7 +113,5 @@ public class EventsPrivateController {
             @RequestBody EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest,
             @PathVariable Integer userId,
             @PathVariable Integer eventId
-    ) {
-        return null;
-    }
+    );
 }

@@ -1,4 +1,4 @@
-package ru.practicum.ewm.controller.events.impl;
+package ru.practicum.ewm.controller.events;
 
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.events.EventFullDto;
@@ -11,8 +11,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/events")
-
-public class EventsController {
+public interface EventsController {
 
     /**
      * Получение событий с возможностью фильтрации
@@ -46,9 +45,7 @@ public class EventsController {
             @RequestParam(defaultValue = "false") Boolean onlyAvailable,
             @RequestParam(defaultValue = "0") Integer from,
             @RequestParam(defaultValue = "10") Integer size
-    ) {
-        return null;
-    }
+    );
 
     /**
      * событие должно быть опубликовано
@@ -62,8 +59,5 @@ public class EventsController {
      * 404 - Запрос составлен некорректно ApiError
      */
     @GetMapping("{eventId}")
-    EventFullDto getEvent(
-            @PathVariable Integer eventId) {
-        return null;
-    }
+    EventFullDto getEvent(@PathVariable Integer eventId);
 }
