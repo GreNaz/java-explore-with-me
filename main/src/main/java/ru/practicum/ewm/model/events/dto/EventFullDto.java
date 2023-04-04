@@ -1,5 +1,6 @@
 package ru.practicum.ewm.model.events.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import ru.practicum.ewm.model.Location;
 import ru.practicum.ewm.model.categories.dto.CategoryDto;
@@ -22,6 +23,7 @@ public class EventFullDto {
     private LocalDateTime createdOn; //Дата и время создания события (в формате "yyyy-MM-dd HH:mm:ss")
     private String description; //Полное описание события
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime eventDate; //Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
     private UserShortDto initiator;
     private Location location;

@@ -23,8 +23,9 @@ public interface EventMapper {
     @Mapping(target = "createdOn")
     @Mapping(target = "eventDate")
     @Mapping(target = "publishedOn")
+//    @Mapping(target = "confirmedRequests")
     @Mapping(target = "views", expression = "java(0)")
-    @Mapping(target = "state", expression = "java(event.state().name())")
+    @Mapping(target = "state", expression = "java(event.getState().name())")
     EventFullDto toEventFullDto(Event event);
 
     @Mapping(target = "eventDate")

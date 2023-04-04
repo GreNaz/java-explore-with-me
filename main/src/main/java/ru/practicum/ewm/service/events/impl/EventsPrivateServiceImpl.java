@@ -47,10 +47,11 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
 
         newEventDto.setLocation(locationRepository.save(newEventDto.getLocation()));
 
-        Event event = eventsRepository.save(EventMapper.EVENT_MAPPER.toEvent(initiator, category, newEventDto));
-        EventFullDto fullEventDto = EventMapper.EVENT_MAPPER.toEventFullDto(event);
-        fullEventDto.setConfirmedRequests(0);
-        return fullEventDto;
+        Event eventAfterMapping = EventMapper.EVENT_MAPPER.toEvent(initiator, category, newEventDto);
+
+        Event event = eventsRepository.save(eventAfterMapping);
+
+        return EventMapper.EVENT_MAPPER.toEventFullDto(event);
     }
 
     @Override
