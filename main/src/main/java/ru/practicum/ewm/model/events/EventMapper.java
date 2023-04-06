@@ -1,12 +1,12 @@
 package ru.practicum.ewm.model.events;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 import ru.practicum.ewm.model.categories.Category;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.EventShortDto;
 import ru.practicum.ewm.model.events.dto.NewEventDto;
+import ru.practicum.ewm.model.events.dto.UpdateEventUserRequest;
 import ru.practicum.ewm.model.users.User;
 
 @Mapper
@@ -20,10 +20,12 @@ public interface EventMapper {
     @Mapping(target = "publishedOn", expression = "java(java.time.LocalDateTime.now())")
     Event toEvent(User initiator, Category category, NewEventDto newEventDto);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateEventFromDto(UpdateEventUserRequest updateEventUserRequest, @MappingTarget Event event);
+
     @Mapping(target = "createdOn")
     @Mapping(target = "eventDate")
     @Mapping(target = "publishedOn")
-//    @Mapping(target = "confirmedRequests")
     @Mapping(target = "views", expression = "java(0)")
     @Mapping(target = "state", expression = "java(event.getState().name())")
     EventFullDto toEventFullDto(Event event);

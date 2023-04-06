@@ -23,17 +23,19 @@ public class ParticipationRequest {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE NOT NULL")
     private LocalDateTime created;
 
     @ManyToOne
-    @JoinColumn(name = "event_id")
+    @JoinColumn(name = "event_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Event event;
 
     @ManyToOne
-    @JoinColumn(name = "requester_id")
+    @JoinColumn(name = "requester_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User requester;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private RequestStatus status;
 }

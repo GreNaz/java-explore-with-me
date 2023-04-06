@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.UpdateEventAdminRequest;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -18,6 +19,7 @@ public interface EventsAdminService {
             Pageable pageable
     );
 
+    @Transactional
     EventFullDto updateEvent(
             UpdateEventAdminRequest updateEventAdminRequest,
             Integer eventId);

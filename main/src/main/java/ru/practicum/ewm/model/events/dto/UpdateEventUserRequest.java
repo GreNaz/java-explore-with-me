@@ -3,6 +3,7 @@ package ru.practicum.ewm.model.events.dto;
 import lombok.*;
 import ru.practicum.ewm.model.Location;
 import ru.practicum.ewm.model.categories.dto.CategoryDto;
+import ru.practicum.ewm.model.events.StateAction;
 
 import java.time.LocalDateTime;
 
@@ -25,6 +26,6 @@ public class UpdateEventUserRequest {
     private Boolean paid; //  Новое значение флага о платности мероприятия
     private Integer participantLimit; //  Новый лимит пользователей
     private Boolean requestModeration; //  Нужна ли пре-модерация заявок на участие
-    private String stateAction; //  Новое состояние события SEND_TO_REVIEW, CANCEL_REVIEW
+    private StateAction stateAction; //  Новое состояние события SEND_TO_REVIEW, CANCEL_REVIEW
     private String title; //  Новый заголовок
 }
