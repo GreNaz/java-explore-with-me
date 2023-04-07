@@ -6,6 +6,7 @@ import ru.practicum.ewm.model.users.dto.UserShortDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @Builder

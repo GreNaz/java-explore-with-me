@@ -1,7 +1,7 @@
 package ru.practicum.ewm.service.events;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.practicum.ewm.model.events.State;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.UpdateEventAdminRequest;
 
@@ -13,10 +13,11 @@ public interface EventsAdminService {
     List<EventFullDto> getEvents(
             List<Integer> users,
             List<Integer> categories,
-            List<String> states,
+            List<State> states,
             String rangeStart,
             String rangeEnd,
-            Pageable pageable
+            Integer from,
+            Integer size
     );
 
     @Transactional

@@ -2,6 +2,7 @@ package ru.practicum.ewm.controller.events;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.ewm.model.events.State;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.UpdateEventAdminRequest;
 
@@ -33,7 +34,7 @@ public interface EventsAdminController {
     List<EventFullDto> getEvents(
             @RequestParam(required = false) List<Integer> users,
             @RequestParam(required = false) List<Integer> categories,
-            @RequestParam(required = false) List<String> states,
+            @RequestParam(required = false) List<State> states,
             @RequestParam(required = false) String rangeStart,
             @RequestParam(required = false) String rangeEnd,
             @RequestParam(defaultValue = "0") Integer from,

@@ -23,8 +23,7 @@ public interface RequestsPrivateController {
      * 404 - Пользователь не найден ApiError
      */
     @GetMapping()
-    List<ParticipationRequestDto> getRequest(
-            @PathVariable Integer userId);
+    List<ParticipationRequestDto> getRequest(@PathVariable Integer userId);
 
     /**
      * нельзя добавить повторный запрос (Ожидается код ошибки 409)
@@ -42,10 +41,7 @@ public interface RequestsPrivateController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    ParticipationRequestDto setRequest(
-            @RequestParam Integer eventId,
-            @PathVariable Integer userId
-    );
+    ParticipationRequestDto setRequest(@RequestParam Integer eventId, @PathVariable Integer userId);
 
     /**
      * Отмена своего запроса на участие в событии
@@ -56,7 +52,5 @@ public interface RequestsPrivateController {
      * 404 - Запрос не найден или недоступен ApiError
      */
     @PatchMapping("/{requestId}/cancel")
-    ParticipationRequestDto updateRequest(
-            @PathVariable Integer userId,
-            @PathVariable Integer requestId);
+    ParticipationRequestDto updateRequest(@PathVariable Integer userId, @PathVariable Integer requestId);
 }
