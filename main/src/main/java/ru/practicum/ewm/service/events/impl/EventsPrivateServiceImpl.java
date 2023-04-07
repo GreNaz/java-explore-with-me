@@ -8,6 +8,7 @@ import ru.practicum.ewm.model.categories.Category;
 import ru.practicum.ewm.model.errors.ConflictException;
 import ru.practicum.ewm.model.errors.NotFoundException;
 import ru.practicum.ewm.model.events.Event;
+import ru.practicum.ewm.model.events.EventMapper;
 import ru.practicum.ewm.model.events.State;
 import ru.practicum.ewm.model.events.dto.*;
 import ru.practicum.ewm.model.requests.RequestStatus;
@@ -24,6 +25,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static ru.practicum.ewm.model.events.EventMapper.EVENT_MAPPER;
 import static ru.practicum.ewm.model.events.State.CANCELED;
@@ -42,7 +44,9 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
 
     @Override
     public List<EventShortDto> getEvents(Integer userId, Pageable pageable) {
-        return null;
+        return eventsRepository.findAllByInitiatorId(userId, pageable).stream()
+                .map(EventMapper.EVENT_MAPPER::toEventShortDto)
+                .collect(Collectors.toList());
     }
 
     @Override

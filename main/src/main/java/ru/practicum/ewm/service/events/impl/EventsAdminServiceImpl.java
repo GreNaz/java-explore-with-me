@@ -91,7 +91,9 @@ public class EventsAdminServiceImpl implements EventsAdminService {
         }
 
         if (updateEventAdminRequest.getCategory() != null) {
-            Category category = categoriesRepository.findById(updateEventAdminRequest.getCategory().getId()).orElseThrow(()
+            Category category = categoriesRepository.findById(updateEventAdminRequest
+                    .getCategory()
+                    .getId()).orElseThrow(()
                     -> new NotFoundException("Category not found for update"));
             event.setCategory(category);
         }
