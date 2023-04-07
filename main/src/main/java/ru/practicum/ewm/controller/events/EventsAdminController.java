@@ -1,5 +1,6 @@
 package ru.practicum.ewm.controller.events;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.UpdateEventAdminRequest;
@@ -52,6 +53,8 @@ public interface EventsAdminController {
      * 404 - Событие не найдено или недоступно ApiError
      * 409 - Событие не удовлетворяет правилам редактирования ApiError
      */
+
+    @ResponseStatus(HttpStatus.CREATED)
     @PatchMapping("{eventId}")
     EventFullDto updateEvent(
             @RequestBody UpdateEventAdminRequest updateEventAdminRequest,

@@ -17,14 +17,12 @@ import ru.practicum.ewm.service.events.EventsAdminService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.List;
 
 import static ru.practicum.ewm.model.events.AdminStateAction.PUBLISH_EVENT;
 import static ru.practicum.ewm.model.events.AdminStateAction.REJECT_EVENT;
 import static ru.practicum.ewm.model.events.State.CANCELED;
 import static ru.practicum.ewm.model.events.State.PUBLISHED;
-import static ru.practicum.ewm.model.events.StateAction.CANCEL_REVIEW;
 
 @Service
 @RequiredArgsConstructor
@@ -94,23 +92,8 @@ public class EventsAdminServiceImpl implements EventsAdminService {
             event.setLocation(locationRepository.save(updateEventAdminRequest.getLocation()));
         }
 
-        switch (updateEventAdminRequest.getStateAction()) {
-            case CANCEL_REVIEW:
-                event.setState(CANCELED);
-                break;
-        }
-
-        if (Objects.equals(eventUpdateRequestDto.getStateAction(), UserActionState.CANCEL_REVIEW.name())) {
-            event.setEventState(EventState.CANCELED);
-        }
-        if (Objects.equals(eventUpdateRequestDto.getStateAction(), UserActionState.SEND_TO_REVIEW.name())) {
-            event.setEventState(EventState.PENDING);
-        }
-
-
         eventsRepository.save(event);
-        FullEventDto fullEventDto = EventMapper.EVENT_MAPPER.toFullEventDto(event);
-        EventUtil.getConfirmedRequests(Collections.singletonList(fullEventDto), requestsRepository);
-        return EventUtil.getViews(Collections.singletonList(fullEventDto), statService).get(0);
+
+        return EventMapper.EVENT_MAPPER.toEventFullDto(event);
     }
 }

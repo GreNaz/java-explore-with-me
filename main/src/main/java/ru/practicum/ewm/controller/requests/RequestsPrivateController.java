@@ -1,5 +1,6 @@
 package ru.practicum.ewm.controller.requests;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
 
@@ -40,6 +41,7 @@ public interface RequestsPrivateController {
      * 409 - Нарушение целостности данных ApiError
      */
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     ParticipationRequestDto setRequest(
             @RequestParam Integer eventId,
             @PathVariable Integer userId

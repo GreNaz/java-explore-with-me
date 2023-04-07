@@ -3,6 +3,8 @@ package ru.practicum.ewm.controller.events.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.controller.events.EventsPrivateController;
 import ru.practicum.ewm.model.events.dto.*;
