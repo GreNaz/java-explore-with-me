@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class EventsControllerImpl implements EventsController {
+public class EventsPublicControllerImpl implements EventsController {
     private final EventService service;
 
     public List<EventShortDto> getEvents(String text,
@@ -32,7 +32,8 @@ public class EventsControllerImpl implements EventsController {
         return service.getEvents(text, categories, paid, rangeStart, rangeEnd, sort, onlyAvailable, pageable, request);
     }
 
-    public EventFullDto getEvent(Integer eventId) {
-        return service.getEvent(eventId);
+    public EventFullDto getEvent(Integer eventId,
+                                 HttpServletRequest request) {
+        return service.getEvent(eventId, request);
     }
 }

@@ -61,5 +61,6 @@ public interface EventsController {
      * 404 - Запрос составлен некорректно ApiError
      */
     @GetMapping("{eventId}")
-    EventFullDto getEvent(@PathVariable Integer eventId);
+    EventFullDto getEvent(@PathVariable Integer eventId,
+                          HttpServletRequest request);
 }
