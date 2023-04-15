@@ -10,11 +10,14 @@ import ru.practicum.ewm.model.events.State;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
 public interface EventsRepository extends JpaRepository<Event, Integer> {
     List<Event> findAllByInitiatorId(Integer userId, Pageable pageable);
+
+    Optional<Event> findByInitiatorIdAndId(Integer initiator_id, Integer id);
 
     @Query("SELECT e " +
             "FROM Event AS e " +

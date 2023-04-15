@@ -71,7 +71,13 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
 
     @Override
     public EventFullDto getEvent(Integer userId, Integer eventId) {
-        return null;
+        Event event = eventsRepository.findByInitiatorIdAndId(userId, eventId).orElseThrow(() ->
+                new NotFoundException("Event not found"));
+
+        EventFullDto fullEventDto = EventMapper.EVENT_MAPPER.toEventFullDto(event);
+        fullEventDto.setConfirmedRequests(requestsRepository
+                .findAllByEventIdAndStatus(eventId, RequestStatus.CONFIRMED).size());
+        return fullEventDto;
     }
 
     @Override
