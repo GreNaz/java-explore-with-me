@@ -72,6 +72,9 @@ public class RequestsServiceImpl implements RequestsService {
 
     @Override
     public ParticipationRequestDto updateRequest(Integer userId, Integer requestId) {
-        return null;
+        ParticipationRequest request = requestsRepository.findByIdAndRequesterId(requestId, userId).orElseThrow(() ->
+                new NotFoundException("Request not found"));
+        request.setStatus(RequestStatus.CANCELED);
+        return RequestsMapper.REQUESTS_MAPPER.toParticipationRequestDto(requestsRepository.save(request));
     }
 }

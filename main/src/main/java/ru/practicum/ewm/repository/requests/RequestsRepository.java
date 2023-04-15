@@ -15,6 +15,8 @@ import java.util.Optional;
 public interface RequestsRepository extends JpaRepository<ParticipationRequest, Integer> {
     Optional<ParticipationRequest> findByEventIdAndRequesterId(Integer eventId, Integer userId);
 
+    Optional<ParticipationRequest> findByIdAndRequesterId(Integer id, Integer requester_id);
+
     List<ParticipationRequest> findByRequesterId(Integer requester_id);
 
     @Query("select participationRequest from ParticipationRequest participationRequest " +
