@@ -17,7 +17,6 @@ import ru.practicum.ewm.repository.location.LocationRepository;
 import ru.practicum.ewm.service.events.EventsAdminService;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +28,6 @@ import static ru.practicum.ewm.model.events.State.PUBLISHED;
 @Service
 @RequiredArgsConstructor
 public class EventsAdminServiceImpl implements EventsAdminService {
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private final EventsRepository eventsRepository;
     private final CategoriesRepository categoriesRepository;
@@ -55,11 +53,12 @@ public class EventsAdminServiceImpl implements EventsAdminService {
     public EventFullDto updateEvent(UpdateEventAdminRequest updateEventAdminRequest,
                                     Integer eventId) {
 
-        Event event = eventsRepository.findById(eventId).orElseThrow(() -> new NotFoundException("Event not found"));
-//TODO Падает при парминге даты
+        Event event = eventsRepository.findById(eventId).orElseThrow(()
+                -> new NotFoundException("Event not found"));
+
         if (updateEventAdminRequest.getEventDate() != null
-                && (LocalDateTime.parse(updateEventAdminRequest.getEventDate().format(FORMATTER))
-                .isBefore(LocalDateTime.now()))) {
+                && (updateEventAdminRequest.getEventDate())
+                .isBefore(LocalDateTime.now())) {
             throw new ConflictException("Date in the past");
 
         }
@@ -96,13 +95,12 @@ public class EventsAdminServiceImpl implements EventsAdminService {
                     -> new NotFoundException("Category not found for update"));
             event.setCategory(category);
         }
+        EventMapper.EVENT_MAPPER.updateEventFromDto(updateEventAdminRequest, event);
 
         if (updateEventAdminRequest.getLocation() != null) {
             event.setLocation(locationRepository.save(updateEventAdminRequest.getLocation()));
         }
 
-        eventsRepository.save(event);
-
-        return EventMapper.EVENT_MAPPER.toEventFullDto(event);
+        return EventMapper.EVENT_MAPPER.toEventFullDto(eventsRepository.save(event));
     }
 }

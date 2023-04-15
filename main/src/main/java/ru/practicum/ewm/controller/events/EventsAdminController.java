@@ -55,7 +55,7 @@ public interface EventsAdminController {
      * 409 - Событие не удовлетворяет правилам редактирования ApiError
      */
 
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     @PatchMapping("{eventId}")
     EventFullDto updateEvent(
             @RequestBody UpdateEventAdminRequest updateEventAdminRequest,
