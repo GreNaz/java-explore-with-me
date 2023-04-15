@@ -56,7 +56,7 @@ public class EventsAdminServiceImpl implements EventsAdminService {
                                     Integer eventId) {
 
         Event event = eventsRepository.findById(eventId).orElseThrow(() -> new NotFoundException("Event not found"));
-
+//TODO Падает при парминге даты
         if (updateEventAdminRequest.getEventDate() != null
                 && (LocalDateTime.parse(updateEventAdminRequest.getEventDate().format(FORMATTER))
                 .isBefore(LocalDateTime.now()))) {
@@ -92,8 +92,7 @@ public class EventsAdminServiceImpl implements EventsAdminService {
 
         if (updateEventAdminRequest.getCategory() != null) {
             Category category = categoriesRepository.findById(updateEventAdminRequest
-                    .getCategory()
-                    .getId()).orElseThrow(()
+                    .getCategory()).orElseThrow(()
                     -> new NotFoundException("Category not found for update"));
             event.setCategory(category);
         }

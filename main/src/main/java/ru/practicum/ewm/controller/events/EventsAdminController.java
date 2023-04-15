@@ -59,5 +59,6 @@ public interface EventsAdminController {
     @PatchMapping("{eventId}")
     EventFullDto updateEvent(
             @RequestBody UpdateEventAdminRequest updateEventAdminRequest,
-            @PathVariable Integer eventId);
+            @PathVariable Integer eventId
+    );
 }
