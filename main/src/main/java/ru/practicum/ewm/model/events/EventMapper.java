@@ -23,15 +23,16 @@ public interface EventMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEventFromDto(UpdateEventUserRequest updateEventUserRequest, @MappingTarget Event event);
 
-    @Mapping(target = "createdOn")
-    @Mapping(target = "eventDate")
+    @Mapping(target = "createdOn", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Mapping(target = "eventDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
     @Mapping(target = "publishedOn")
     @Mapping(target = "views", expression = "java(0)")
     @Mapping(target = "state", expression = "java(event.getState().name())")
     EventFullDto toEventFullDto(Event event);
 
-    @Mapping(target = "eventDate")
+    @Mapping(target = "eventDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
     EventShortDto toEventShortDto(Event event);
 
+    @Mapping(target = "eventDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
     EventShortDto toEventShortDto(EventFullDto eventFullDto);
 }

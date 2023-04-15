@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.EventShortDto;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -16,8 +17,8 @@ public interface EventService {
                                   String rangeEnd,
                                   String sort,
                                   Boolean onlyAvailable,
-                                  Pageable pageable
-    );
+                                  Pageable pageable,
+                                  HttpServletRequest request);
 
     EventFullDto getEvent(Integer eventId);
 

@@ -9,6 +9,7 @@ import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.EventShortDto;
 import ru.practicum.ewm.service.events.EventService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -24,10 +25,11 @@ public class EventsControllerImpl implements EventsController {
                                          String sort,
                                          Boolean onlyAvailable,
                                          Integer from,
-                                         Integer size
+                                         Integer size,
+                                         HttpServletRequest request
     ) {
         Pageable pageable = PageRequest.of(from, size);
-        return service.getEvents(text, categories, paid, rangeStart, rangeEnd, sort, onlyAvailable, pageable);
+        return service.getEvents(text, categories, paid, rangeStart, rangeEnd, sort, onlyAvailable, pageable, request);
     }
 
     public EventFullDto getEvent(Integer eventId) {

@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.EventShortDto;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -44,7 +45,8 @@ public interface EventsController {
             @RequestParam(required = false) String sort,
             @RequestParam(defaultValue = "false") Boolean onlyAvailable,
             @RequestParam(defaultValue = "0") Integer from,
-            @RequestParam(defaultValue = "10") Integer size
+            @RequestParam(defaultValue = "10") Integer size,
+            HttpServletRequest request
     );
 
     /**
