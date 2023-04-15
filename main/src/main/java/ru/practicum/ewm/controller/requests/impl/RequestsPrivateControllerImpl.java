@@ -11,19 +11,19 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class RequestsPrivateControllerImpl implements RequestsPrivateController {
-    private final RequestsService service;
+    private final RequestsService requestsService;
 
     public List<ParticipationRequestDto> getRequest(Integer userId) {
-        return service.getRequest(userId);
+        return requestsService.getRequest(userId);
     }
 
     public ParticipationRequestDto setRequest(Integer eventId,
                                               Integer userId) {
-        return service.setRequest(eventId, userId);
+        return requestsService.setRequest(eventId, userId);
     }
 
     public ParticipationRequestDto updateRequest(Integer userId,
                                                  Integer requestId) {
-        return service.updateRequest(userId, requestId);
+        return requestsService.updateRequest(userId, requestId);
     }
 }

@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +32,9 @@ public class RequestsServiceImpl implements RequestsService {
 
     @Override
     public List<ParticipationRequestDto> getRequest(Integer userId) {
-        return null;
+        return requestsRepository.findByRequesterId(userId).stream()
+                .map(RequestsMapper.REQUESTS_MAPPER::toParticipationRequestDto)
+                .collect(Collectors.toList());
     }
 
     @Override

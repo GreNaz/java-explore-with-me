@@ -15,6 +15,8 @@ import java.util.Optional;
 public interface RequestsRepository extends JpaRepository<ParticipationRequest, Integer> {
     Optional<ParticipationRequest> findByEventIdAndRequesterId(Integer eventId, Integer userId);
 
+    List<ParticipationRequest> findByRequesterId(Integer requester_id);
+
     @Query("select p from ParticipationRequest p where p.event.id = :eventId and p.status = 'CONFIRMED'")
     List<ParticipationRequest> findByEventIdConfirmed(@Param("eventId") Integer eventId);
 
