@@ -12,6 +12,7 @@ import ru.practicum.ewm.model.events.EventMapper;
 import ru.practicum.ewm.model.events.State;
 import ru.practicum.ewm.model.events.dto.*;
 import ru.practicum.ewm.model.requests.RequestStatus;
+import ru.practicum.ewm.model.requests.RequestsMapper;
 import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
 import ru.practicum.ewm.model.users.User;
 import ru.practicum.ewm.repository.categories.CategoriesRepository;
@@ -138,7 +139,9 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
 
     @Override
     public List<ParticipationRequestDto> getEventRequests(Integer userId, Integer eventId) {
-        return null;
+        return requestsRepository.findByEventIdAndInitiatorId(eventId, userId).stream()
+                .map(RequestsMapper.REQUESTS_MAPPER::toParticipationRequestDto)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -17,6 +17,12 @@ public interface RequestsRepository extends JpaRepository<ParticipationRequest, 
 
     List<ParticipationRequest> findByRequesterId(Integer requester_id);
 
+    @Query("select participationRequest from ParticipationRequest participationRequest " +
+            "where participationRequest.event.id = :eventId " +
+            "and participationRequest.event.initiator.id = :userId")
+    List<ParticipationRequest> findByEventIdAndInitiatorId(@Param("eventId") Integer eventId,
+                                                           @Param("userId") Integer userId);
+
     @Query("select p from ParticipationRequest p where p.event.id = :eventId and p.status = 'CONFIRMED'")
     List<ParticipationRequest> findByEventIdConfirmed(@Param("eventId") Integer eventId);
 
