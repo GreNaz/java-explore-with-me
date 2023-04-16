@@ -20,14 +20,12 @@ public class CompilationServiceImpl implements CompilationService {
 
     @Override
     public CompilationDto setCompilation(NewCompilationDto newCompilationDto) {
-        //TODO Получить лист events и передать его 2 параметром в маппер
         Compilation compilation = repository.save(CompilationMapper.toCompilation(newCompilationDto, null));
         return CompilationMapper.toCompilationDto(compilation);
     }
 
     @Override
     public void deleteCompilation(Integer compId) {
-        //TODO проверка
         repository.deleteById(compId);
     }
 

@@ -3,6 +3,8 @@ package ru.practicum.ewm.model.events.dto;
 import lombok.*;
 import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
 
+import java.util.List;
+
 /**
  * Результат подтверждения/отклонения заявок на участие в событии
  */
@@ -12,6 +14,6 @@ import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventRequestStatusUpdateResult {
-    private ParticipationRequestDto confirmedRequests;
-    private ParticipationRequestDto rejectedRequests;
+    private List<ParticipationRequestDto> confirmedRequests;
+    private List<ParticipationRequestDto> rejectedRequests;
 }

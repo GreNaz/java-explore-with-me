@@ -11,6 +11,7 @@ import ru.practicum.ewm.model.events.Event;
 import ru.practicum.ewm.model.events.EventMapper;
 import ru.practicum.ewm.model.events.State;
 import ru.practicum.ewm.model.events.dto.*;
+import ru.practicum.ewm.model.requests.ParticipationRequest;
 import ru.practicum.ewm.model.requests.RequestStatus;
 import ru.practicum.ewm.model.requests.RequestsMapper;
 import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
@@ -24,6 +25,7 @@ import ru.practicum.ewm.service.events.EventsPrivateService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -148,6 +150,51 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
     public EventRequestStatusUpdateResult updateEventStatusRequest(EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest,
                                                                    Integer userId,
                                                                    Integer eventId) {
-        return null;
+        Event event = eventsRepository.findById(eventId).orElseThrow(() ->
+                new NotFoundException("Event not found"));
+        if (!event.getInitiator().getId().equals(userId)) {
+            throw new NotFoundException("You don't have event with id " + eventId);
+        }
+        if (Boolean.TRUE.equals(!event.getRequestModeration())
+                || event.getParticipantLimit() == 0) {
+            throw new ConflictException("Confirmation is not required");
+        }
+
+        EventRequestStatusUpdateResult requestUpdateDto = new EventRequestStatusUpdateResult(new ArrayList<>(), new ArrayList<>());
+        Integer confirmedRequests = requestsRepository.findByEventIdConfirmed(eventId).size();
+        List<ParticipationRequest> requests = requestsRepository.findByEventIdAndRequestsIds(eventId,
+                eventRequestStatusUpdateRequest.getRequestIds());
+        if (Objects.equals(eventRequestStatusUpdateRequest.getStatus(), RequestStatus.CONFIRMED.name())
+                && confirmedRequests + requests.size() > event.getParticipantLimit()) {
+            requests.forEach(request -> request.setStatus(RequestStatus.REJECTED));
+            List<ParticipationRequestDto> requestDto = requests.stream()
+                    .map(RequestsMapper.REQUESTS_MAPPER::toParticipationRequestDto)
+                    .collect(Collectors.toList());
+            requestUpdateDto.setRejectedRequests(requestDto);
+            requestsRepository.saveAll(requests);
+            throw new ConflictException("Requests limit exceeded");
+        }
+        if (eventRequestStatusUpdateRequest.getStatus().equalsIgnoreCase(RequestStatus.REJECTED.name())) {
+            requests.forEach(request -> {
+                if (request.getStatus().equals(RequestStatus.CONFIRMED)) {
+                    throw new ConflictException("You can't reject confirmed request");
+                }
+                request.setStatus(RequestStatus.REJECTED);
+            });
+            List<ParticipationRequestDto> requestDto = requests.stream()
+                    .map(RequestsMapper.REQUESTS_MAPPER::toParticipationRequestDto)
+                    .collect(Collectors.toList());
+            requestUpdateDto.setRejectedRequests(requestDto);
+            requestsRepository.saveAll(requests);
+        } else if (eventRequestStatusUpdateRequest.getStatus().equalsIgnoreCase(RequestStatus.CONFIRMED.name())
+                && eventRequestStatusUpdateRequest.getRequestIds().size() <= event.getParticipantLimit() - confirmedRequests) {
+            requests.forEach(request -> request.setStatus(RequestStatus.CONFIRMED));
+            List<ParticipationRequestDto> requestDto = requests.stream()
+                    .map(RequestsMapper.REQUESTS_MAPPER::toParticipationRequestDto)
+                    .collect(Collectors.toList());
+            requestUpdateDto.setConfirmedRequests(requestDto);
+            requestsRepository.saveAll(requests);
+        }
+        return requestUpdateDto;
     }
 }
