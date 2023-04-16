@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.users.dto.NewUserRequest;
 import ru.practicum.ewm.model.users.dto.UserDto;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -39,7 +40,7 @@ public interface UsersAdminController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    UserDto setUser(@RequestBody NewUserRequest newUserRequest);
+    UserDto setUser(@RequestBody @Valid NewUserRequest newUserRequest);
 
     /**
      * @param userId id пользователя

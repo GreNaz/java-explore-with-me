@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Данные нового пользователя
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class NewUserRequest {
     @NotBlank
+    @NotNull
     private String name;
     @Email
     private String email;
