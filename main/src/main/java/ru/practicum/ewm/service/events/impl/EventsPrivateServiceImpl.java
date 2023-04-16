@@ -24,7 +24,6 @@ import ru.practicum.ewm.repository.users.UsersRepository;
 import ru.practicum.ewm.service.events.EventsPrivateService;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -37,7 +36,6 @@ import static ru.practicum.ewm.model.events.State.PENDING;
 @Service
 @RequiredArgsConstructor
 public class EventsPrivateServiceImpl implements EventsPrivateService {
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private final EventsRepository eventsRepository;
     private final UsersRepository usersRepository;
