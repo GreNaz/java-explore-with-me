@@ -1,6 +1,5 @@
 package ru.practicum.ewm.model.events.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import ru.practicum.ewm.model.categories.dto.CategoryDto;
 import ru.practicum.ewm.model.users.dto.UserShortDto;
