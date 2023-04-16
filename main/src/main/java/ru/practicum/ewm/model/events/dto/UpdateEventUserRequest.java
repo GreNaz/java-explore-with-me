@@ -1,5 +1,6 @@
 package ru.practicum.ewm.model.events.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import ru.practicum.ewm.model.Location;
 import ru.practicum.ewm.model.categories.dto.CategoryDto;
@@ -21,6 +22,7 @@ public class UpdateEventUserRequest {
     private String annotation; // Новая аннотация
     private CategoryDto category; // Новая категория
     private String description; //  Новое описание
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime eventDate; //  Новые дата и время на которые намечено событие. Дата и время указываются в формате "yyyy-MM-dd HH:mm:ss"
     private Location location;
     private Boolean paid; //  Новое значение флага о платности мероприятия

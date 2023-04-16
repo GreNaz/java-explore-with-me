@@ -96,7 +96,7 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
         }
 
         if (updateEventUserRequest.getEventDate() != null) {
-            LocalDateTime time = LocalDateTime.parse(updateEventUserRequest.getEventDate().format(FORMATTER));
+            LocalDateTime time = updateEventUserRequest.getEventDate();
             if (LocalDateTime.now().isAfter(time.minusHours(2))) {
                 throw new ConflictException("Event starts in less then 2 hours");
             }
