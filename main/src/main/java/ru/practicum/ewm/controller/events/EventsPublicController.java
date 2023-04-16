@@ -1,18 +1,22 @@
 package ru.practicum.ewm.controller.events;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.EventShortDto;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 /**
  * Публичный API для работы с событиями
  */
+@Validated
 @RestController
 @RequestMapping("/events")
-public interface EventsController {
+public interface EventsPublicController {
 
     /**
      * Получение событий с возможностью фильтрации
@@ -44,8 +48,8 @@ public interface EventsController {
             @RequestParam(required = false) String rangeEnd,
             @RequestParam(required = false) String sort,
             @RequestParam(defaultValue = "false") Boolean onlyAvailable,
-            @RequestParam(defaultValue = "0") Integer from,
-            @RequestParam(defaultValue = "10") Integer size,
+            @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
+            @Positive @RequestParam(defaultValue = "10") Integer size,
             HttpServletRequest request
     );
 

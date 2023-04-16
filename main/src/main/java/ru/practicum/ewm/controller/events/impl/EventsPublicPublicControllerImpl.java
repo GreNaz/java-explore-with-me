@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.ewm.controller.events.EventsController;
+import ru.practicum.ewm.controller.events.EventsPublicController;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.EventShortDto;
 import ru.practicum.ewm.service.events.EventService;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class EventsPublicControllerImpl implements EventsController {
+public class EventsPublicPublicControllerImpl implements EventsPublicController {
     private final EventService service;
 
     public List<EventShortDto> getEvents(String text,

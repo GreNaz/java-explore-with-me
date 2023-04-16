@@ -1,14 +1,18 @@
 package ru.practicum.ewm.controller.categories;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.categories.dto.CategoryDto;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 /**
  * Публичный API для работы с категориями
  */
 
+@Validated
 @RestController
 @RequestMapping("/categories")
 public interface CategoriesController {
@@ -22,8 +26,8 @@ public interface CategoriesController {
      */
     @GetMapping
     List<CategoryDto> getCategories(
-            @RequestParam(defaultValue = "0") Integer from,
-            @RequestParam(defaultValue = "10") Integer size
+            @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
+            @Positive @RequestParam(defaultValue = "10") Integer size
     );
 
     /**
@@ -34,5 +38,5 @@ public interface CategoriesController {
      * 404 - Категория не найдена или недоступна ApiError
      */
     @GetMapping("{catId}")
-    CategoryDto getCategory(@PathVariable Integer catId);
+    CategoryDto getCategory(@Positive @PathVariable Integer catId);
 }

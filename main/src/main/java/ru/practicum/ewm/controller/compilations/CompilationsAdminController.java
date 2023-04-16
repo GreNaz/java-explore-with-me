@@ -1,16 +1,19 @@
 package ru.practicum.ewm.controller.compilations;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.compilations.dto.CompilationDto;
 import ru.practicum.ewm.model.compilations.dto.NewCompilationDto;
 import ru.practicum.ewm.model.compilations.dto.UpdateCompilationRequest;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 
 /**
  * API для работы с подборками событий
  */
+@Validated
 @RestController
 @RequestMapping("/admin/compilations")
 public interface CompilationsAdminController {
@@ -32,7 +35,7 @@ public interface CompilationsAdminController {
      */
     @DeleteMapping("{compId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteCompilation(@PathVariable Integer compId);
+    void deleteCompilation(@Positive @PathVariable Integer compId);
 
     /**
      * @param updateCompilationRequest данные для обновления подборки
@@ -42,7 +45,7 @@ public interface CompilationsAdminController {
      */
     @PatchMapping("{compId}")
     CompilationDto updateCompilation(
-            @RequestBody UpdateCompilationRequest updateCompilationRequest,
+            @Valid @RequestBody UpdateCompilationRequest updateCompilationRequest,
             @PathVariable Integer compId);
 }
 

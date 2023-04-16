@@ -1,16 +1,20 @@
 package ru.practicum.ewm.controller.events;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.events.dto.*;
 import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 /**
  * Закрытый API для работы с событиями
  */
+@Validated
 @RestController
 @RequestMapping("/users/{userId}/events")
 public interface EventsPrivateController {
@@ -26,9 +30,9 @@ public interface EventsPrivateController {
      * 400 - Запрос составлен некорректно ApiError
      */
     @GetMapping
-    List<EventShortDto> getEvents(@PathVariable Integer userId,
-                                  @RequestParam(defaultValue = "0") Integer from,
-                                  @RequestParam(defaultValue = "10") Integer size
+    List<EventShortDto> getEvents(@Positive @PathVariable Integer userId,
+                                  @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
+                                  @Positive @RequestParam(defaultValue = "10") Integer size
     );
 
     /**
@@ -43,8 +47,8 @@ public interface EventsPrivateController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    EventFullDto setEvent(@RequestBody @Valid NewEventDto newEventDto,
-                          @PathVariable Integer userId
+    EventFullDto setEvent(@Valid @RequestBody NewEventDto newEventDto,
+                          @Positive @PathVariable Integer userId
     );
 
     /**
@@ -57,8 +61,8 @@ public interface EventsPrivateController {
      * 404 - Событие не найдено или недоступно ApiError
      */
     @GetMapping("{eventId}")
-    EventFullDto getEvent(@PathVariable Integer userId,
-                          @PathVariable Integer eventId);
+    EventFullDto getEvent(@Positive @PathVariable Integer userId,
+                          @Positive @PathVariable Integer eventId);
 
     /**
      * @param userId                 id текущего пользователя
@@ -70,9 +74,9 @@ public interface EventsPrivateController {
      * 409 - Событие не удовлетворяет правилам редактирования ApiError
      */
     @PatchMapping("{eventId}")
-    EventFullDto updateEvent(@PathVariable Integer userId,
-                             @PathVariable Integer eventId,
-                             @RequestBody UpdateEventUserRequest updateEventUserRequest);
+    EventFullDto updateEvent(@Positive @PathVariable Integer userId,
+                             @Positive @PathVariable Integer eventId,
+                             @Valid @RequestBody UpdateEventUserRequest updateEventUserRequest);
 
     /**
      * В случае, если по заданным фильтрам не найдено ни одной заявки, возвращает пустой список

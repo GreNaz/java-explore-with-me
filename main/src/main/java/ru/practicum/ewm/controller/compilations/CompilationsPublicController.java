@@ -1,13 +1,17 @@
 package ru.practicum.ewm.controller.compilations;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.compilations.dto.CompilationDto;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 /**
  * Публичный API для работы с подборками событий
  */
+@Validated
 @RestController
 @RequestMapping("/compilations")
 public interface CompilationsPublicController {
@@ -22,8 +26,8 @@ public interface CompilationsPublicController {
     @GetMapping
     List<CompilationDto> getCompilations(
             @RequestParam(required = false) Boolean pinned,
-            @RequestParam(defaultValue = "0") Integer from,
-            @RequestParam(defaultValue = "10") Integer size
+            @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
+            @Positive @RequestParam(defaultValue = "10") Integer size
     );
 
     /**
@@ -34,5 +38,5 @@ public interface CompilationsPublicController {
      * Запрос составлен некорректно - 400 ApiError
      */
     @GetMapping("{compId}")
-    CompilationDto getCompilation(@PathVariable Integer compId);
+    CompilationDto getCompilation(@Positive @PathVariable Integer compId);
 }

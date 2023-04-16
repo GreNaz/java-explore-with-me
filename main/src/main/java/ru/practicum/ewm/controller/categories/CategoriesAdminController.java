@@ -6,12 +6,15 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.categories.dto.CategoryDto;
 import ru.practicum.ewm.model.categories.dto.NewCategoryDto;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+
 /**
  * API для работы с категориями
  */
 
-@RestController
 @Validated
+@RestController
 @RequestMapping("/admin/categories")
 public interface CategoriesAdminController {
 
@@ -24,14 +27,14 @@ public interface CategoriesAdminController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    CategoryDto setCategory(@RequestBody NewCategoryDto newCategoryDto);
+    CategoryDto setCategory(@Valid @RequestBody NewCategoryDto newCategoryDto);
 
     /**
      * @param catId id категории
      */
     @DeleteMapping("{catId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteCategory(@PathVariable Integer catId);
+    void deleteCategory(@Positive @PathVariable Integer catId);
 
     /**
      * @param categoryDto Данные категории для изменения
@@ -42,5 +45,6 @@ public interface CategoriesAdminController {
      * 409 - Нарушение целостности данных ApiError
      */
     @PatchMapping("{catId}")
-    CategoryDto updateCategory(@RequestBody CategoryDto categoryDto, @PathVariable Integer catId);
+    CategoryDto updateCategory(@RequestBody @Valid CategoryDto categoryDto,
+                               @Positive @PathVariable Integer catId);
 }

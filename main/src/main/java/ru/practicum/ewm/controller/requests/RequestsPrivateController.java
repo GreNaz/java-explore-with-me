@@ -1,14 +1,17 @@
 package ru.practicum.ewm.controller.requests;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
 
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 /**
  * Закрытый API для работы с запросами текущего пользователя на участие в событиях
  */
+@Validated
 @RestController
 @RequestMapping("users/{userId}/requests")
 public interface RequestsPrivateController {
@@ -41,7 +44,9 @@ public interface RequestsPrivateController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    ParticipationRequestDto setRequest(@RequestParam Integer eventId, @PathVariable Integer userId);
+    ParticipationRequestDto setRequest(
+            @Positive @RequestParam Integer eventId,
+            @Positive @PathVariable Integer userId);
 
     /**
      * Отмена своего запроса на участие в событии

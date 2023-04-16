@@ -1,16 +1,21 @@
 package ru.practicum.ewm.controller.events;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.model.events.State;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.UpdateEventAdminRequest;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 /**
  * API для работы с событиями
  */
+@Validated
 @RestController
 @RequestMapping("/admin/events")
 public interface EventsAdminController {
@@ -37,8 +42,8 @@ public interface EventsAdminController {
             @RequestParam(required = false) List<State> states,
             @RequestParam(required = false) String rangeStart,
             @RequestParam(required = false) String rangeEnd,
-            @RequestParam(defaultValue = "0") Integer from,
-            @RequestParam(defaultValue = "10") Integer size
+            @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
+            @Positive @RequestParam(defaultValue = "10") Integer size
     );
 
     /**
@@ -58,7 +63,7 @@ public interface EventsAdminController {
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("{eventId}")
     EventFullDto updateEvent(
-            @RequestBody UpdateEventAdminRequest updateEventAdminRequest,
+            @Valid @RequestBody UpdateEventAdminRequest updateEventAdminRequest,
             @PathVariable Integer eventId
     );
 }
