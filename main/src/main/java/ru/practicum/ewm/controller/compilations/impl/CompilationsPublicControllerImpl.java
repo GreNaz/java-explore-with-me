@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.ewm.controller.compilations.CompilationsController;
+import ru.practicum.ewm.controller.compilations.CompilationsPublicController;
 import ru.practicum.ewm.model.compilations.dto.CompilationDto;
 import ru.practicum.ewm.service.compilations.CompilationService;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class CompilationsControllerImpl implements CompilationsController {
+public class CompilationsPublicControllerImpl implements CompilationsPublicController {
 
     private final CompilationService service;
 

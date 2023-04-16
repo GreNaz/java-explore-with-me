@@ -6,6 +6,8 @@ import ru.practicum.ewm.model.compilations.dto.CompilationDto;
 import ru.practicum.ewm.model.compilations.dto.NewCompilationDto;
 import ru.practicum.ewm.model.compilations.dto.UpdateCompilationRequest;
 
+import javax.validation.Valid;
+
 /**
  * API для работы с подборками событий
  */
@@ -20,8 +22,8 @@ public interface CompilationsAdminController {
      * 409 - Нарушение целостности данных ApiError
      */
     @PostMapping
-    CompilationDto setCompilation(@RequestBody NewCompilationDto newCompilationDto
-    );
+    @ResponseStatus(HttpStatus.CREATED)
+    CompilationDto setCompilation(@Valid @RequestBody NewCompilationDto newCompilationDto);
 
     /**
      * @param compId id подборки

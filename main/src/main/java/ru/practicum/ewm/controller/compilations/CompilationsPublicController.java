@@ -10,7 +10,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/compilations")
-public interface CompilationsController {
+public interface CompilationsPublicController {
     /**
      * @param pinned искать только закрепленные/не закрепленные подборки
      * @param from   количество элементов, которые нужно пропустить для формирования текущего набора

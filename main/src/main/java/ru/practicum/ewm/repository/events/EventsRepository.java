@@ -19,6 +19,10 @@ public interface EventsRepository extends JpaRepository<Event, Integer> {
 
     Optional<Event> findByInitiatorIdAndId(Integer initiatorId, Integer id);
 
+    @Query("select event from Event event " +
+            "where event.id IN (:ids)")
+    List<Event> findByIds(@Param("ids") List<Integer> ids);
+
     @Query("SELECT e " +
             "FROM Event AS e " +
             "WHERE " +
