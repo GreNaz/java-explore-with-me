@@ -81,7 +81,7 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
         return fullEventDto;
     }
 
-    @Override
+    @Override //TODO
     public EventFullDto updateEvent(Integer userId,
                                     Integer eventId,
                                     UpdateEventUserRequest updateEventUserRequest) {

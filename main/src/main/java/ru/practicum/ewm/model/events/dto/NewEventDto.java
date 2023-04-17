@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import ru.practicum.ewm.model.Location;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 /**
@@ -20,14 +19,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class NewEventDto {
     @NotNull
-    @Max(2000)
-    @Min(20)
+    @Size(min = 5, max = 2000)
     private String annotation; //Краткое описание события
     @NotNull
     private Integer category; //id категории к которой относится событие
     @NotNull
-    @Max(7000)
-    @Min(20)
+    @Size(max = 7000)
     private String description; //Полное описание события
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
@@ -35,10 +32,8 @@ public class NewEventDto {
     @NotNull
     private Location location;
     @NotNull
-    @Max(120)
-    @Min(3)
+    @Size(min = 5, max = 500)
     private String title; //Заголовок события
-
 
     private Boolean paid; //Нужно ли оплачивать участие в событии
     @PositiveOrZero
