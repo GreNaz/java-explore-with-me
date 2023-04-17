@@ -10,5 +10,5 @@ import lombok.*;
 public class ViewStatsDTO {
     private String app; // Название сервиса
     private String uri; // URI сервиса
-    private Integer hits; // Количество просмотров
+    private Long hits; // Количество просмотров
 }

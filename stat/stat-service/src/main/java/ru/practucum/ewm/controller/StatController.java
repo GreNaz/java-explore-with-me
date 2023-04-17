@@ -4,6 +4,7 @@ import dto.EndpointHitDTO;
 import dto.ViewStatsDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practucum.ewm.service.StatService;
 
@@ -20,6 +21,7 @@ public class StatController {
     // Сохранение информации о том,
     // что на uri конкретного сервиса был отправлен запрос пользователем.
     // Название сервиса, uri и ip пользователя указаны в теле запроса.
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/hit")
     public EndpointHitDTO save(@RequestBody EndpointHitDTO endpointHitDTO) {
         return service.save(endpointHitDTO);
