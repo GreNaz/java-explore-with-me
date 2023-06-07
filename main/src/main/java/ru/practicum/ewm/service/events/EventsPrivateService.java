@@ -11,29 +11,29 @@ import java.util.List;
 @Service
 public interface EventsPrivateService {
 
-    List<EventShortDto> getEvents(Integer userId,
+    List<EventShortDto> getEvents(Long userId,
                                   Pageable pageable);
 
     @Transactional
     EventFullDto setEvent(NewEventDto newEventDto,
-                          Integer userId);
+                          Long userId);
 
 
-    EventFullDto getEvent(Integer userId,
-                          Integer eventId);
+    EventFullDto getEvent(Long userId,
+                          Long eventId);
 
     @Transactional
-    EventFullDto updateEvent(Integer userId,
-                             Integer eventId,
+    EventFullDto updateEvent(Long userId,
+                             Long eventId,
                              UpdateEventUserRequest updateEventUserRequest);
 
 
-    List<ParticipationRequestDto> getEventRequests(Integer userId,
-                                                   Integer eventId);
+    List<ParticipationRequestDto> getEventRequests(Long userId,
+                                                   Long eventId);
 
     @Transactional
     EventRequestStatusUpdateResult updateEventStatusRequest(
             EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest,
-            Integer userId,
-            Integer eventId);
+            Long userId,
+            Long eventId);
 }

@@ -23,5 +23,5 @@ public interface EventsAdminService {
     @Transactional
     EventFullDto updateEvent(
             UpdateEventAdminRequest updateEventAdminRequest,
-            Integer eventId);
+            Long eventId);
 }

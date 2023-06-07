@@ -14,7 +14,7 @@ public interface UsersService {
     @Transactional
     UserDto setUser(NewUserRequest newUserRequest);
 
-    List<UserDto> getUsers(List<Integer> ids, Pageable pageable);
+    List<UserDto> getUsers(List<Long> ids, Pageable pageable);
 
-    void deleteUser(Integer userId);
+    void deleteUser(Long userId);
 }

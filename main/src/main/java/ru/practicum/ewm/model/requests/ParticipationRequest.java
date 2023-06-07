@@ -21,7 +21,7 @@ public class ParticipationRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE NOT NULL")
     private LocalDateTime created;

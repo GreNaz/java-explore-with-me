@@ -27,7 +27,7 @@ public class EventsAdminControllerImpl implements EventsAdminController {
         return service.getEvents(users, categories, states, rangeStart, rangeEnd, from, size);
     }
 
-    public EventFullDto updateEvent(UpdateEventAdminRequest updateEventAdminRequest, Integer eventId) {
+    public EventFullDto updateEvent(UpdateEventAdminRequest updateEventAdminRequest, Long eventId) {
         return service.updateEvent(updateEventAdminRequest, eventId);
     }
 }

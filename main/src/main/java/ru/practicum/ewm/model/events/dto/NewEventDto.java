@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import ru.practicum.ewm.model.Location;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
@@ -18,12 +19,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewEventDto {
-    @NotNull
+    @NotBlank
     @Size(min = 5, max = 2000)
     private String annotation; //Краткое описание события
     @NotNull
     private Integer category; //id категории к которой относится событие
-    @NotNull
+    @NotBlank
     @Size(max = 7000)
     private String description; //Полное описание события
     @NotNull

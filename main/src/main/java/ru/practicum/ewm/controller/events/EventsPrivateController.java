@@ -30,7 +30,7 @@ public interface EventsPrivateController {
      * 400 - Запрос составлен некорректно ApiError
      */
     @GetMapping
-    List<EventShortDto> getEvents(@Positive @PathVariable Integer userId,
+    List<EventShortDto> getEvents(@Positive @PathVariable Long userId,
                                   @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
                                   @Positive @RequestParam(defaultValue = "10") Integer size
     );
@@ -48,7 +48,7 @@ public interface EventsPrivateController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     EventFullDto setEvent(@Valid @RequestBody NewEventDto newEventDto,
-                          @Positive @PathVariable Integer userId
+                          @Positive @PathVariable Long userId
     );
 
     /**
@@ -61,8 +61,8 @@ public interface EventsPrivateController {
      * 404 - Событие не найдено или недоступно ApiError
      */
     @GetMapping("{eventId}")
-    EventFullDto getEvent(@Positive @PathVariable Integer userId,
-                          @Positive @PathVariable Integer eventId);
+    EventFullDto getEvent(@Positive @PathVariable Long userId,
+                          @Positive @PathVariable Long eventId);
 
     /**
      * @param userId                 id текущего пользователя
@@ -74,9 +74,9 @@ public interface EventsPrivateController {
      * 409 - Событие не удовлетворяет правилам редактирования ApiError
      */
     @PatchMapping("{eventId}")
-    EventFullDto updateEvent(@Positive @PathVariable Integer userId,
-                             @Positive @PathVariable Integer eventId,
-                             @Valid @RequestBody UpdateEventUserRequest updateEventUserRequest);
+    EventFullDto updateEvent(@Positive @PathVariable Long userId,
+                             @Positive @PathVariable Long eventId,
+                             @RequestBody UpdateEventUserRequest updateEventUserRequest);
 
     /**
      * В случае, если по заданным фильтрам не найдено ни одной заявки, возвращает пустой список
@@ -87,8 +87,8 @@ public interface EventsPrivateController {
      * 400 - Запрос составлен некорректно ApiError
      */
     @GetMapping("{eventId}/requests")
-    List<ParticipationRequestDto> getEventRequests(@PathVariable Integer userId,
-                                                   @PathVariable Integer eventId);
+    List<ParticipationRequestDto> getEventRequests(@PathVariable Long userId,
+                                                   @PathVariable Long eventId);
 
     /**
      * Изменение статуса (подтверждена, отменена) заявок на участие в событии текущего пользователя
@@ -109,6 +109,6 @@ public interface EventsPrivateController {
 
     @PatchMapping("{eventId}/requests")
     EventRequestStatusUpdateResult updateEventStatusRequest(@RequestBody EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest,
-                                                            @PathVariable Integer userId,
-                                                            @PathVariable Integer eventId);
+                                                            @PathVariable Long userId,
+                                                            @PathVariable Long eventId);
 }

@@ -8,11 +8,11 @@ import java.util.List;
 
 @Service
 public interface RequestsService {
-    List<ParticipationRequestDto> getRequest(Integer userId);
+    List<ParticipationRequestDto> getRequest(Long userId);
 
     @Transactional
-    ParticipationRequestDto setRequest(Integer eventId, Integer userId);
+    ParticipationRequestDto setRequest(Long eventId, Long userId);
 
     @Transactional
-    ParticipationRequestDto updateRequest(Integer userId, Integer requestId);
+    ParticipationRequestDto updateRequest(Long userId, Long requestId);
 }

@@ -14,14 +14,14 @@ import java.util.Optional;
 
 
 @Repository
-public interface EventsRepository extends JpaRepository<Event, Integer> {
-    List<Event> findAllByInitiatorId(Integer userId, Pageable pageable);
+public interface EventsRepository extends JpaRepository<Event, Long> {
+    List<Event> findAllByInitiatorId(Long userId, Pageable pageable);
 
-    Optional<Event> findByInitiatorIdAndId(Integer initiatorId, Integer id);
+    Optional<Event> findByInitiatorIdAndId(Long initiatorId, Long id);
 
     @Query("select event from Event event " +
             "where event.id IN (:ids)")
-    List<Event> findByIds(@Param("ids") List<Integer> ids);
+    List<Event> findByIds(@Param("ids") List<Long> ids);
 
     @Query("SELECT e " +
             "FROM Event AS e " +

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.practucum.ewm.service.StatService;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -17,6 +18,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StatController {
     private final StatService service;
+
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
 
     // Сохранение информации о том,
     // что на uri конкретного сервиса был отправлен запрос пользователем.
@@ -36,6 +40,13 @@ public class StatController {
             @RequestParam(required = false) List<String> uris,
             // Нужно ли учитывать только уникальные посещения (только с уникальным ip)
             @RequestParam(defaultValue = "false") boolean unique) {
-        return service.getStat(start, end, uris, unique);
+        if (start.isAfter(end)) {
+            throw new BadRequestException("Bad Request");
+        }
+        return service.getStat(
+                start,
+                end,
+                uris,
+                unique);
     }
 }

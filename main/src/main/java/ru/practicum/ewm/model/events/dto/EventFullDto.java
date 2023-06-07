@@ -15,11 +15,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventFullDto {
-    private Integer id;
+    private Long id;
     private String annotation; //Краткое описание
     @NotNull
     private CategoryDto category;
-    private Integer confirmedRequests;  //Количество одобренных заявок на участие в данном событии
+    private Long confirmedRequests;  //Количество одобренных заявок на участие в данном событии
     private LocalDateTime createdOn; //Дата и время создания события (в формате "yyyy-MM-dd HH:mm:ss")
     private String description; //Полное описание события
     @NotNull
@@ -35,5 +35,5 @@ public class EventFullDto {
     private String state; //Список состояний жизненного цикла события
     @NotNull
     private String title; //Заголовок
-    private Integer views; //Количество просмотрев события
+    private Long views; //Количество просмотрев события
 }

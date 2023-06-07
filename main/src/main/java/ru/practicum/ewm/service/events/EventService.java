@@ -20,6 +20,6 @@ public interface EventService {
                                   Pageable pageable,
                                   HttpServletRequest request);
 
-    EventFullDto getEvent(Integer eventId, HttpServletRequest request);
+    EventFullDto getEvent(Long eventId, HttpServletRequest request);
 
 }

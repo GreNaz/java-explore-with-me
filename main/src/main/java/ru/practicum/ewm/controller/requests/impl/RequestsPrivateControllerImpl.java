@@ -15,17 +15,17 @@ import java.util.List;
 public class RequestsPrivateControllerImpl implements RequestsPrivateController {
     private final RequestsService requestsService;
 
-    public List<ParticipationRequestDto> getRequest(Integer userId) {
+    public List<ParticipationRequestDto> getRequest(Long userId) {
         return requestsService.getRequest(userId);
     }
 
-    public ParticipationRequestDto setRequest(Integer eventId,
-                                              Integer userId) {
+    public ParticipationRequestDto setRequest(Long eventId,
+                                              Long userId) {
         return requestsService.setRequest(eventId, userId);
     }
 
-    public ParticipationRequestDto updateRequest(Integer userId,
-                                                 Integer requestId) {
+    public ParticipationRequestDto updateRequest(Long userId,
+                                                 Long requestId) {
         return requestsService.updateRequest(userId, requestId);
     }
 }

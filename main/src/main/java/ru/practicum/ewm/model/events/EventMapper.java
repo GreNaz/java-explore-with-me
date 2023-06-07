@@ -28,7 +28,7 @@ public interface EventMapper {
     void updateEventFromDto(UpdateEventAdminRequest updateEventAdminRequest, @MappingTarget Event event);
 
 
-    @Mapping(target = "views", expression = "java(0)")
+    @Mapping(target = "views", expression = "java(0L)")
     @Mapping(target = "state", expression = "java(event.getState().name())")
     @Mapping(target = "createdOn", dateFormat = "yyyy-MM-dd HH:mm:ss")
     @Mapping(target = "eventDate", dateFormat = "yyyy-MM-dd HH:mm:ss")

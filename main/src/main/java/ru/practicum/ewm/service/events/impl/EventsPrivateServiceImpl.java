@@ -44,14 +44,14 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
     private final RequestsRepository requestsRepository;
 
     @Override
-    public List<EventShortDto> getEvents(Integer userId, Pageable pageable) {
+    public List<EventShortDto> getEvents(Long userId, Pageable pageable) {
         return eventsRepository.findAllByInitiatorId(userId, pageable).stream()
                 .map(EventMapper.EVENT_MAPPER::toEventShortDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public EventFullDto setEvent(NewEventDto newEventDto, Integer userId) {
+    public EventFullDto setEvent(NewEventDto newEventDto, Long userId) {
         if (newEventDto.getEventDate().isBefore(LocalDateTime.now())) {
             throw new ConflictException("Event contains wrong date");
         }
@@ -71,19 +71,19 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
     }
 
     @Override
-    public EventFullDto getEvent(Integer userId, Integer eventId) {
+    public EventFullDto getEvent(Long userId, Long eventId) {
         Event event = eventsRepository.findByInitiatorIdAndId(userId, eventId).orElseThrow(() ->
                 new NotFoundException("Event not found"));
 
         EventFullDto fullEventDto = EventMapper.EVENT_MAPPER.toEventFullDto(event);
-        fullEventDto.setConfirmedRequests(requestsRepository
+        fullEventDto.setConfirmedRequests((long) requestsRepository
                 .findAllByEventIdAndStatus(eventId, RequestStatus.CONFIRMED).size());
         return fullEventDto;
     }
 
-    @Override //TODO
-    public EventFullDto updateEvent(Integer userId,
-                                    Integer eventId,
+    @Override
+    public EventFullDto updateEvent(Long userId,
+                                    Long eventId,
                                     UpdateEventUserRequest updateEventUserRequest) {
 
         Event event = eventsRepository.findById(eventId).orElseThrow(() ->
@@ -131,14 +131,14 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
         EventFullDto fullEventDto = EVENT_MAPPER.toEventFullDto(event);
 
         fullEventDto.setConfirmedRequests(
-                requestsRepository.findAllByEventIdAndStatus(eventId, RequestStatus.CONFIRMED).size()
+                (long) requestsRepository.findAllByEventIdAndStatus(eventId, RequestStatus.CONFIRMED).size()
         );
 
         return fullEventDto;
     }
 
     @Override
-    public List<ParticipationRequestDto> getEventRequests(Integer userId, Integer eventId) {
+    public List<ParticipationRequestDto> getEventRequests(Long userId, Long eventId) {
         return requestsRepository.findByEventIdAndInitiatorId(eventId, userId).stream()
                 .map(RequestsMapper.REQUESTS_MAPPER::toParticipationRequestDto)
                 .collect(Collectors.toList());
@@ -146,8 +146,8 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
 
     @Override
     public EventRequestStatusUpdateResult updateEventStatusRequest(EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest,
-                                                                   Integer userId,
-                                                                   Integer eventId) {
+                                                                   Long userId,
+                                                                   Long eventId) {
         Event event = eventsRepository.findById(eventId).orElseThrow(() ->
                 new NotFoundException("Event not found"));
         if (!event.getInitiator().getId().equals(userId)) {

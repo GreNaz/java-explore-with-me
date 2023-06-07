@@ -21,12 +21,12 @@ public class UsersAdminControllerImpl implements UsersAdminController {
         return service.setUser(newUserRequest);
     }
 
-    public List<UserDto> getUsers(List<Integer> ids, Integer from, Integer size) {
+    public List<UserDto> getUsers(List<Long> ids, Integer from, Integer size) {
         Pageable pageable = PageRequest.of(from, size);
         return service.getUsers(ids, pageable);
     }
 
-    public void deleteUser(Integer userId) {
+    public void deleteUser(Long userId) {
         service.deleteUser(userId);
     }
 }

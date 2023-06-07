@@ -31,14 +31,14 @@ public class RequestsServiceImpl implements RequestsService {
     private final UsersRepository usersRepository;
 
     @Override
-    public List<ParticipationRequestDto> getRequest(Integer userId) {
+    public List<ParticipationRequestDto> getRequest(Long userId) {
         return requestsRepository.findByRequesterId(userId).stream()
                 .map(RequestsMapper.REQUESTS_MAPPER::toParticipationRequestDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public ParticipationRequestDto setRequest(Integer eventId, Integer userId) {
+    public ParticipationRequestDto setRequest(Long eventId, Long userId) {
 
         Event event = eventsRepository.findById(eventId).orElseThrow(() -> new NotFoundException("Event not found"));
         if (Objects.equals(event.getInitiator().getId(), userId)) {
@@ -71,7 +71,7 @@ public class RequestsServiceImpl implements RequestsService {
     }
 
     @Override
-    public ParticipationRequestDto updateRequest(Integer userId, Integer requestId) {
+    public ParticipationRequestDto updateRequest(Long userId, Long requestId) {
         ParticipationRequest request = requestsRepository.findByIdAndRequesterId(requestId, userId).orElseThrow(() ->
                 new NotFoundException("Request not found"));
         request.setStatus(RequestStatus.CANCELED);

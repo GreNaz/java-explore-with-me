@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateCompilationRequest {
-    private List<Integer> events; // Список id событий подборки для полной замены текущего списка
+    private List<Long> events; // Список id событий подборки для полной замены текущего списка
     private Boolean pinned; // Закреплена ли подборка на главной странице сайта
     private String title; // Заголовок подборки
 }

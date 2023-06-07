@@ -17,23 +17,12 @@ import java.util.List;
 public class EventsPublicPublicControllerImpl implements EventsPublicController {
     private final EventService service;
 
-    public List<EventShortDto> getEvents(String text,
-                                         List<Integer> categories,
-                                         Boolean paid,
-                                         String rangeStart,
-                                         String rangeEnd,
-                                         String sort,
-                                         Boolean onlyAvailable,
-                                         Integer from,
-                                         Integer size,
-                                         HttpServletRequest request
-    ) {
+    public List<EventShortDto> getEvents(String text, List<Integer> categories, Boolean paid, String rangeStart, String rangeEnd, String sort, Boolean onlyAvailable, Integer from, Integer size, HttpServletRequest request) {
         Pageable pageable = PageRequest.of(from, size);
         return service.getEvents(text, categories, paid, rangeStart, rangeEnd, sort, onlyAvailable, pageable, request);
     }
 
-    public EventFullDto getEvent(Integer eventId,
-                                 HttpServletRequest request) {
+    public EventFullDto getEvent(Long eventId, HttpServletRequest request) {
         return service.getEvent(eventId, request);
     }
 }

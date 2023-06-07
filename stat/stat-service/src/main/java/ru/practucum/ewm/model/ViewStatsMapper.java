@@ -1,7 +1,9 @@
 package ru.practucum.ewm.model;
 
 import dto.ViewStatsDTO;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class ViewStatsMapper {
     public static ViewStatsDTO toViewStatsDTO(ViewStats viewStats) {
         return ViewStatsDTO.builder()

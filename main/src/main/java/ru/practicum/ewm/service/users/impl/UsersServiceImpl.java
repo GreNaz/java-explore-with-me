@@ -26,7 +26,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<UserDto> getUsers(List<Integer> ids, Pageable pageable) {
+    public List<UserDto> getUsers(List<Long> ids, Pageable pageable) {
         if (!ids.isEmpty()) {
             return repository.findAllByIdIn(ids, pageable).stream()
                     .map(UserMapper::toUserDto)
@@ -39,7 +39,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public void deleteUser(Integer userId) {
+    public void deleteUser(Long userId) {
         //проверить наличие пользователя?
         repository.deleteById(userId);
     }

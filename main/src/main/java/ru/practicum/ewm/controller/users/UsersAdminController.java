@@ -30,7 +30,7 @@ public interface UsersAdminController {
      * 400 - Запрос составлен некорректно ApiError
      */
     @GetMapping()
-    List<UserDto> getUsers(@RequestParam List<Integer> ids, @RequestParam(defaultValue = "0") Integer from, @RequestParam(defaultValue = "10") Integer size);
+    List<UserDto> getUsers(@RequestParam List<Long> ids, @RequestParam(defaultValue = "0") Integer from, @RequestParam(defaultValue = "10") Integer size);
 
     /**
      * @param newUserRequest Данные добавляемого пользователя
@@ -49,5 +49,5 @@ public interface UsersAdminController {
      */
     @DeleteMapping("{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteUser(@PathVariable Integer userId);
+    void deleteUser(@PathVariable Long userId);
 }

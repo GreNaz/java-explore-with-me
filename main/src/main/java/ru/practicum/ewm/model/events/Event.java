@@ -19,7 +19,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "annotation", nullable = false, length = 2000)
     private String annotation;
@@ -49,7 +49,7 @@ public class Event {
     private Boolean paid;
 
     @Column(columnDefinition = "Integer DEFAULT 0")
-    private Integer participantLimit;
+    private Long participantLimit;
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE NOT NULL")
     private LocalDateTime publishedOn;

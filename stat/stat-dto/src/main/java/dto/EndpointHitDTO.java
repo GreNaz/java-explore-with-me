@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class EndpointHitDTO {
     // Идентификатор записи
-    private Integer id;
+    private Long id;
     // Идентификатор сервиса для которого записывается информация
     private String app;
     // URI для которого был осуществлен запрос

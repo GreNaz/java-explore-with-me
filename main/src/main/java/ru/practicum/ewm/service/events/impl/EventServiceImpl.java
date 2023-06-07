@@ -63,7 +63,7 @@ public class EventServiceImpl implements EventService {
         List<EventFullDto> fullEventDtoList = events.stream()
                 .map(EventMapper.EVENT_MAPPER::toEventFullDto)
                 .collect(Collectors.toList());
-        fullEventDtoList.forEach(event -> event.setConfirmedRequests(requestsRepository.findByEventIdConfirmed(event.getId()).size()));
+        fullEventDtoList.forEach(event -> event.setConfirmedRequests((long) requestsRepository.findByEventIdConfirmed(event.getId()).size()));
         if (Boolean.TRUE.equals(onlyAvailable)) {
             fullEventDtoList = fullEventDtoList.stream()
                     .filter(event -> event.getParticipantLimit() <= event.getConfirmedRequests())
@@ -81,13 +81,17 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventFullDto getEvent(Integer eventId,
+    public EventFullDto getEvent(Long eventId,
                                  HttpServletRequest request) {
         Event event = eventsRepository.findById(eventId).orElseThrow(() ->
                 new NotFoundException("Event not found")
         );
+        if (!event.getState().name().equalsIgnoreCase("published")) {
+            throw new NotFoundException("Event not found");
+        }
         EventFullDto fullEventDto = EventMapper.EVENT_MAPPER.toEventFullDto(event);
-        fullEventDto.setConfirmedRequests(requestsRepository.findAllByEventIdAndStatus(event.getId(),
+
+        fullEventDto.setConfirmedRequests((long) requestsRepository.findAllByEventIdAndStatus(event.getId(),
                 RequestStatus.CONFIRMED).size());
         statService.createView(HitMapper.toEndpointHit("ewm-main-service", request));
         return fullEventDto;

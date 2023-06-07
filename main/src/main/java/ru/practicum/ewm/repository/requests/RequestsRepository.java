@@ -12,31 +12,32 @@ import java.util.Optional;
 
 
 @Repository
-public interface RequestsRepository extends JpaRepository<ParticipationRequest, Integer> {
-    Optional<ParticipationRequest> findByEventIdAndRequesterId(Integer eventId, Integer userId);
+public interface RequestsRepository extends JpaRepository<ParticipationRequest, Long> {
+    Optional<ParticipationRequest> findByEventIdAndRequesterId(Long eventId, Long userId);
 
-    @Query("select p from ParticipationRequest p " +
-            "where p.event.id = :eventId and p.status = 'CONFIRMED'")
-    List<ParticipationRequest> findByEventIdConfirmed(@Param("eventId") Long eventId);
+    Optional<ParticipationRequest> findByIdAndRequesterId(Long id, Long requesterId);
 
-    Optional<ParticipationRequest> findByIdAndRequesterId(Integer id, Integer requesterId);
-
-    List<ParticipationRequest> findByRequesterId(Integer requesterId);
+    List<ParticipationRequest> findByRequesterId(Long requesterId);
 
     @Query("select participationRequest from ParticipationRequest participationRequest " +
             "where participationRequest.event.id = :event " +
             "and participationRequest.id IN (:requestIds)")
-    List<ParticipationRequest> findByEventIdAndRequestsIds(@Param("event") Integer eventId,
-                                                           @Param("requestIds") List<Integer> requestIds);
+    List<ParticipationRequest> findByEventIdAndRequestsIds(@Param("event") Long eventId,
+                                                           @Param("requestIds") List<Long> requestIds);
 
     @Query("select participationRequest from ParticipationRequest participationRequest " +
             "where participationRequest.event.id = :eventId " +
             "and participationRequest.event.initiator.id = :userId")
-    List<ParticipationRequest> findByEventIdAndInitiatorId(@Param("eventId") Integer eventId,
-                                                           @Param("userId") Integer userId);
+    List<ParticipationRequest> findByEventIdAndInitiatorId(@Param("eventId") Long eventId,
+                                                           @Param("userId") Long userId);
+
+    @Query("select p from ParticipationRequest p " +
+            "where p.status = 'CONFIRMED' " +
+            "and p.event.id IN (:events)")
+    List<ParticipationRequest> findConfirmedToListEvents(@Param("events") List<Long> events);
 
     @Query("select p from ParticipationRequest p where p.event.id = :eventId and p.status = 'CONFIRMED'")
-    List<ParticipationRequest> findByEventIdConfirmed(@Param("eventId") Integer eventId);
+    List<ParticipationRequest> findByEventIdConfirmed(@Param("eventId") Long eventId);
 
-    List<ParticipationRequest> findAllByEventIdAndStatus(Integer eventId, RequestStatus requestStatus);
+    List<ParticipationRequest> findAllByEventIdAndStatus(Long eventId, RequestStatus requestStatus);
 }
