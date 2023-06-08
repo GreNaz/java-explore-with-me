@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.practicum.ewm.model.Location;
 import ru.practicum.ewm.model.categories.Category;
+import ru.practicum.ewm.model.errors.BadRequestException;
 import ru.practicum.ewm.model.errors.ConflictException;
 import ru.practicum.ewm.model.errors.NotFoundException;
 import ru.practicum.ewm.model.events.Event;
@@ -53,7 +54,7 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
     @Override
     public EventFullDto setEvent(NewEventDto newEventDto, Long userId) {
         if (newEventDto.getEventDate().isBefore(LocalDateTime.now())) {
-            throw new ConflictException("Event contains wrong date");
+            throw new BadRequestException("Event contains wrong date");
         }
 
         User initiator = usersRepository.findById(userId).orElseThrow(
@@ -90,18 +91,18 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
                 new NotFoundException("Event not found"));
 
         if (!event.getInitiator().getId().equals(userId)) {
-            throw new NotFoundException("You can't update this event");
+            throw new BadRequestException("You can't update this event");
         }
 
         if (updateEventUserRequest.getEventDate() != null) {
             LocalDateTime time = updateEventUserRequest.getEventDate();
             if (LocalDateTime.now().isAfter(time.minusHours(2))) {
-                throw new ConflictException("Event starts in less then 2 hours");
+                throw new BadRequestException("Event starts in less then 2 hours");
             }
         }
 
         if (event.getState().equals(State.PUBLISHED)) {
-            throw new ConflictException("You can't update published event");
+            throw new BadRequestException("You can't update published event");
         }
 
         if (updateEventUserRequest.getCategory() != null

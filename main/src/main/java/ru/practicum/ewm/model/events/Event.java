@@ -31,7 +31,7 @@ public class Event {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE NOT NULL")
     private LocalDateTime createdOn;
 
-    @Column(length = 5000)
+    @Column(length = 7000)
     private String description;
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE NOT NULL")

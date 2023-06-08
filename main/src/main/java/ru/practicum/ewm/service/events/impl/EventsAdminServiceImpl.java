@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.ewm.model.categories.Category;
+import ru.practicum.ewm.model.errors.BadRequestException;
 import ru.practicum.ewm.model.errors.ConflictException;
 import ru.practicum.ewm.model.errors.NotFoundException;
 import ru.practicum.ewm.model.events.Event;
@@ -71,7 +72,7 @@ public class EventsAdminServiceImpl implements EventsAdminService {
         if (updateEventAdminRequest.getEventDate() != null
                 && (updateEventAdminRequest.getEventDate())
                 .isBefore(LocalDateTime.now())) {
-            throw new ConflictException("Date in the past");
+            throw new BadRequestException("Date in the past");
 
         }
 

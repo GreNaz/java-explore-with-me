@@ -20,12 +20,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class NewEventDto {
     @NotBlank
-    @Size(min = 5, max = 2000)
+    @Size(max = 2000, min = 20)
     private String annotation; //Краткое описание события
     @NotNull
     private Integer category; //id категории к которой относится событие
     @NotBlank
-    @Size(max = 7000)
+    @Size(max = 7000, min = 20)
     private String description; //Полное описание события
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
