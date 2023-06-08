@@ -3,6 +3,7 @@ package ru.practicum.ewm.service.events.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.practicum.ewm.model.errors.BadRequestException;
 import ru.practicum.ewm.model.errors.NotFoundException;
 import ru.practicum.ewm.model.events.Event;
 import ru.practicum.ewm.model.events.EventMapper;
@@ -12,6 +13,7 @@ import ru.practicum.ewm.model.events.dto.EventShortDto;
 import ru.practicum.ewm.model.requests.RequestStatus;
 import ru.practicum.ewm.repository.events.EventsRepository;
 import ru.practicum.ewm.repository.requests.RequestsRepository;
+import ru.practicum.ewm.service.categories.CategoriesService;
 import ru.practicum.ewm.service.events.EventService;
 import ru.practicum.ewm.statistic.HitMapper;
 import ru.practicum.ewm.statistic.StatService;
@@ -32,6 +34,7 @@ public class EventServiceImpl implements EventService {
     private final EventsRepository eventsRepository;
     private final RequestsRepository requestsRepository;
     private final StatService statService;
+    private final CategoriesService categoriesService;
 
     @Override
     public List<EventShortDto> getEvents(String text,
@@ -43,12 +46,16 @@ public class EventServiceImpl implements EventService {
                                          Boolean onlyAvailable,
                                          Pageable pageable,
                                          HttpServletRequest request) {
+        if (!categories.isEmpty()
+                && categories.stream().sorted().collect(Collectors.toList()).get(0) <= 0) {
+            throw new BadRequestException("bad category Id");
+        }
         LocalDateTime start = null;
         LocalDateTime end = null;
         if (rangeStart != null) {
             start = LocalDateTime.parse(rangeStart, FORMATTER);
         }
-        if (rangeStart != null) {
+        if (rangeEnd != null) {
             end = LocalDateTime.parse(rangeEnd, FORMATTER);
         }
         if (text == null) text = "";
@@ -63,7 +70,7 @@ public class EventServiceImpl implements EventService {
         List<EventFullDto> fullEventDtoList = events.stream()
                 .map(EventMapper.EVENT_MAPPER::toEventFullDto)
                 .collect(Collectors.toList());
-        fullEventDtoList.forEach(event -> event.setConfirmedRequests((long) requestsRepository.findByEventIdConfirmed(event.getId()).size()));
+        fullEventDtoList.forEach(event -> event.setConfirmedRequests(requestsRepository.findByEventIdConfirmed(event.getId()).size()));
         if (Boolean.TRUE.equals(onlyAvailable)) {
             fullEventDtoList = fullEventDtoList.stream()
                     .filter(event -> event.getParticipantLimit() <= event.getConfirmedRequests())
@@ -91,7 +98,7 @@ public class EventServiceImpl implements EventService {
         }
         EventFullDto fullEventDto = EventMapper.EVENT_MAPPER.toEventFullDto(event);
 
-        fullEventDto.setConfirmedRequests((long) requestsRepository.findAllByEventIdAndStatus(event.getId(),
+        fullEventDto.setConfirmedRequests(requestsRepository.findAllByEventIdAndStatus(event.getId(),
                 RequestStatus.CONFIRMED).size());
         statService.createView(HitMapper.toEndpointHit("ewm-main-service", request));
         return fullEventDto;

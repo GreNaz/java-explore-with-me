@@ -6,6 +6,7 @@ import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.EventShortDto;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;

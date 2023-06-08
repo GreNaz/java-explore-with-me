@@ -55,19 +55,29 @@ public class EventUtil {
         return new ArrayList<>(views.values());
     }
 
-    public static void getConfirmedRequests(List<EventFullDto> eventDtos, RequestsRepository requestsRepository) {
+    public static void getConfirmedRequests(List<EventFullDto> eventDtos,
+                                            RequestsRepository requestsRepository) {
         List<Long> ids = eventDtos.stream().map(EventFullDto::getId).collect(Collectors.toList());
         List<ParticipationRequest> requests = requestsRepository.findConfirmedToListEvents(ids);
-        Map<Long, Long> counter = new HashMap<>();
-        requests.forEach(element -> counter.put(element.getEvent().getId(), counter.getOrDefault(element.getEvent().getId(), 0L) + 1));
-        eventDtos.forEach(event -> event.setConfirmedRequests(counter.get(event.getId())));
+
+        Map<Long, Integer> counter = new HashMap<>();
+        if (!requests.isEmpty()) {
+            requests.forEach(request -> counter.put(request.getEvent().getId(),
+                    counter.getOrDefault(request.getEvent().getId(), 0) + 1));
+
+            eventDtos.forEach(event -> event.setConfirmedRequests(counter.get(event.getId())));
+        } else {
+            eventDtos.forEach(event -> event.setConfirmedRequests(0));
+        }
     }
 
-    public static void getConfirmedRequestsToShort(List<EventShortDto> eventDtos, RequestsRepository requestsRepository) {
+    public static void getConfirmedRequestsToShort(List<EventShortDto> eventDtos,
+                                                   RequestsRepository requestsRepository) {
         List<Long> ids = eventDtos.stream().map(EventShortDto::getId).collect(Collectors.toList());
         List<ParticipationRequest> requests = requestsRepository.findConfirmedToListEvents(ids);
-        Map<Long, Long> counter = new HashMap<>();
-        requests.forEach(element -> counter.put(element.getEvent().getId(), counter.getOrDefault(element.getEvent().getId(), 0L) + 1));
+        Map<Long, Integer> counter = new HashMap<>();
+        requests.forEach(element -> counter.put(element.getEvent().getId(),
+                counter.getOrDefault(element.getEvent().getId(), 0) + 1));
         eventDtos.forEach(event -> event.setConfirmedRequests(counter.get(event.getId())));
     }
 

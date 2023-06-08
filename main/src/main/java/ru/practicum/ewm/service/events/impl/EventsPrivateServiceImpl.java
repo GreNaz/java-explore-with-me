@@ -76,7 +76,7 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
                 new NotFoundException("Event not found"));
 
         EventFullDto fullEventDto = EventMapper.EVENT_MAPPER.toEventFullDto(event);
-        fullEventDto.setConfirmedRequests((long) requestsRepository
+        fullEventDto.setConfirmedRequests(requestsRepository
                 .findAllByEventIdAndStatus(eventId, RequestStatus.CONFIRMED).size());
         return fullEventDto;
     }
@@ -131,7 +131,7 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
         EventFullDto fullEventDto = EVENT_MAPPER.toEventFullDto(event);
 
         fullEventDto.setConfirmedRequests(
-                (long) requestsRepository.findAllByEventIdAndStatus(eventId, RequestStatus.CONFIRMED).size()
+                requestsRepository.findAllByEventIdAndStatus(eventId, RequestStatus.CONFIRMED).size()
         );
 
         return fullEventDto;

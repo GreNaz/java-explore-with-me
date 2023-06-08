@@ -19,7 +19,7 @@ public class EventFullDto {
     private String annotation; //Краткое описание
     @NotNull
     private CategoryDto category;
-    private Long confirmedRequests;  //Количество одобренных заявок на участие в данном событии
+    private Integer confirmedRequests;  //Количество одобренных заявок на участие в данном событии
     private LocalDateTime createdOn; //Дата и время создания события (в формате "yyyy-MM-dd HH:mm:ss")
     private String description; //Полное описание события
     @NotNull
