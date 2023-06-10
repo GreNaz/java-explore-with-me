@@ -3,6 +3,7 @@ package ru.practicum.ewm.model.compilations.dto;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -20,5 +21,6 @@ public class NewCompilationDto {
     private Boolean pinned; //Закреплена ли подборка на главной странице сайта
 
     @NotBlank
+    @Size(max = 50)
     private String title; //Заголовок подборки
 }

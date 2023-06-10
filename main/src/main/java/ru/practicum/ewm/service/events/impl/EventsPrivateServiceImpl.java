@@ -102,7 +102,7 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
         }
 
         if (event.getState().equals(State.PUBLISHED)) {
-            throw new BadRequestException("You can't update published event");
+            throw new ConflictException("You can't update published event");
         }
 
         if (updateEventUserRequest.getCategory() != null
