@@ -33,7 +33,7 @@ public class NewEventDto {
     @NotNull
     private Location location;
     @NotNull
-    @Size(min = 5, max = 500)
+    @Size(min = 3, max = 120)
     private String title; //Заголовок события
 
     private Boolean paid; //Нужно ли оплачивать участие в событии
