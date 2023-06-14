@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 public class NewUserRequest {
     @NotBlank
     @NotNull
-    @Size(min = 2)
+    @Size(min = 2, max = 250)
     private String name;
     @Email
     @NotBlank
