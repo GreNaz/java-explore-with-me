@@ -31,8 +31,7 @@ public class CompilationServiceImpl implements CompilationService {
 
     @Override
     public void deleteCompilation(Integer compId) {
-        compilationsRepository.findById(compId).orElseThrow(() ->
-                new NotFoundException("Compilation not found"));
+        compilationsRepository.findById(compId).orElseThrow(() -> new NotFoundException("Compilation not found"));
         compilationsRepository.deleteById(compId);
     }
 
@@ -54,7 +53,8 @@ public class CompilationServiceImpl implements CompilationService {
 
     @Override
     public List<CompilationDto> getCompilations(Boolean pinned, Pageable pageable) {
-        return compilationsRepository.findAllByPinned(pinned, pageable).stream()
+        List<Compilation> compilations = compilationsRepository.findAllByPinned(pinned, pageable);
+        return compilations.stream()
                 .map(CompilationMapper::toCompilationDto)
                 .collect(Collectors.toList());
     }

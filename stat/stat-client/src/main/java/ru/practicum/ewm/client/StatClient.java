@@ -48,14 +48,12 @@ public class StatClient {
                                           List<String> uris,
                                           boolean unique) {
 
-        String paramsUri = uris.stream().reduce("", (result, uri) -> result + "&uris=" + uri);
-
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/stats")
                         .queryParam("start", start.format(FORMATTER))
                         .queryParam("end", end.format(FORMATTER))
-                        .queryParam(paramsUri)
+                        .queryParam(uris.toString())
                         .queryParam("unique", unique)
                         .build())
                 .exchangeToMono(response -> {

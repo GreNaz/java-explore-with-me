@@ -4,6 +4,7 @@ import dto.EndpointHitDTO;
 import dto.ViewStatsDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.practucum.ewm.controller.BadRequestException;
 import ru.practucum.ewm.model.EndpointHitMapper;
 import ru.practucum.ewm.repository.StatRepository;
 
@@ -26,6 +27,10 @@ public class StatServiceImpl implements StatService {
                                       LocalDateTime end,
                                       List<String> uris,
                                       boolean unique) {
+        if (start.isAfter(end)) {
+            throw new BadRequestException("Bad Request");
+        }
+
         return repository.getStats(start, end, uris, unique);
     }
 }

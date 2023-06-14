@@ -33,20 +33,10 @@ public class StatController {
 
     @GetMapping("/stats")
     public List<ViewStatsDTO> getStat(
-            //Дата и время конца диапазона за который нужно выгрузить статистику (в формате "yyyy-MM-dd HH:mm:ss")
             @RequestParam LocalDateTime start,
             @RequestParam LocalDateTime end,
-            // Список uri для которых нужно выгрузить статистику
             @RequestParam(required = false) List<String> uris,
-            // Нужно ли учитывать только уникальные посещения (только с уникальным ip)
             @RequestParam(defaultValue = "false") boolean unique) {
-        if (start.isAfter(end)) {
-            throw new BadRequestException("Bad Request");
-        }
-        return service.getStat(
-                start,
-                end,
-                uris,
-                unique);
+        return service.getStat(start, end, uris, unique);
     }
 }
