@@ -24,7 +24,7 @@ public class UsersAdminControllerImpl implements UsersAdminController {
 
     public List<UserDto> getUsers(List<Long> ids, Integer from, Integer size) {
         Pageable pageable = PageRequest.of(from, size);
-        if (ids == null){
+        if (ids == null) {
             ids = new ArrayList<>();
         }
         return service.getUsers(ids, pageable);

@@ -9,8 +9,6 @@ import ru.practicum.ewm.model.events.dto.*;
 import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
 import ru.practicum.ewm.service.events.EventsPrivateService;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
