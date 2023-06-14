@@ -56,13 +56,22 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
         if (newEventDto.getEventDate().isBefore(LocalDateTime.now())) {
             throw new BadRequestException("Event contains wrong date");
         }
-
         User initiator = usersRepository.findById(userId).orElseThrow(
                 () -> new NotFoundException("User with id = " + userId + " not found"));
         Category category = categoriesRepository.findById(newEventDto.getCategory()).orElseThrow(
                 () -> new NotFoundException("Category with id = " + newEventDto.getCategory() + "not found"));
 
         newEventDto.setLocation(locationRepository.save(newEventDto.getLocation()));
+
+        if (newEventDto.getPaid() == null) {
+            newEventDto.setPaid(false);
+        }
+        if (newEventDto.getParticipantLimit() == null) {
+            newEventDto.setParticipantLimit(0);
+        }
+        if (newEventDto.getRequestModeration() == null) {
+            newEventDto.setRequestModeration(true);
+        }
 
         Event eventAfterMapping = EVENT_MAPPER.toEvent(initiator, category, newEventDto);
 
@@ -115,16 +124,17 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
             Location location = locationRepository.save(updateEventUserRequest.getLocation());
             event.setLocation(location);
         }
-
-        switch (updateEventUserRequest.getStateAction()) {
-            case CANCEL_REVIEW:
-                event.setState(CANCELED);
-                break;
-            case SEND_TO_REVIEW:
-                event.setState(PENDING);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + updateEventUserRequest.getStateAction());
+        if (updateEventUserRequest.getStateAction() != null) {
+            switch (updateEventUserRequest.getStateAction()) {
+                case CANCEL_REVIEW:
+                    event.setState(CANCELED);
+                    break;
+                case SEND_TO_REVIEW:
+                    event.setState(PENDING);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + updateEventUserRequest.getStateAction());
+            }
         }
 
         EVENT_MAPPER.updateEventFromDto(updateEventUserRequest, event);

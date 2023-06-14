@@ -54,6 +54,7 @@ public class EventsAdminServiceImpl implements EventsAdminService {
                                         Integer size) {
         List<EventFullDto> fullEventDtoList = eventsDao.findEvents(users, states, categories, rangeStart, rangeEnd, from, size)
                 .stream()
+                .limit(size)
                 .map(EventMapper.EVENT_MAPPER::toEventFullDto)
                 .collect(Collectors.toList());
 
