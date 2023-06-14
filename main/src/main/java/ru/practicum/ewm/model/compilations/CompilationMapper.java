@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 @UtilityClass
 public class CompilationMapper {
     public static Compilation toCompilation(NewCompilationDto newCompilationDto, List<Event> events) {
+        if (newCompilationDto.getPinned() == null){
+            newCompilationDto.setPinned(false);
+        }
         return Compilation.builder()
                 .title(newCompilationDto.getTitle())
                 .pinned(newCompilationDto.getPinned())
