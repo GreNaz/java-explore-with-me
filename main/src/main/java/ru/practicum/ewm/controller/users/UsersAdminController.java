@@ -30,7 +30,9 @@ public interface UsersAdminController {
      * 400 - Запрос составлен некорректно ApiError
      */
     @GetMapping()
-    List<UserDto> getUsers(@RequestParam List<Long> ids, @RequestParam(defaultValue = "0") Integer from, @RequestParam(defaultValue = "10") Integer size);
+    List<UserDto> getUsers(@RequestParam(required = false) List<Long> ids,
+                           @RequestParam(defaultValue = "0") Integer from,
+                           @RequestParam(defaultValue = "10") Integer size);
 
     /**
      * @param newUserRequest Данные добавляемого пользователя

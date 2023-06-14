@@ -7,7 +7,6 @@ import ru.practicum.ewm.model.categories.Category;
 import ru.practicum.ewm.model.categories.CategoryMapper;
 import ru.practicum.ewm.model.categories.dto.CategoryDto;
 import ru.practicum.ewm.model.categories.dto.NewCategoryDto;
-import ru.practicum.ewm.model.errors.ConflictException;
 import ru.practicum.ewm.model.errors.NotFoundException;
 import ru.practicum.ewm.repository.categories.CategoriesRepository;
 import ru.practicum.ewm.service.categories.CategoriesService;
@@ -36,7 +35,8 @@ public class CategoriesServiceImpl implements CategoriesService {
     public CategoryDto updateCategory(CategoryDto categoryDto, Integer catId) {
         Category category = checkCategoryExist(catId);
         if (categoryDto.getName().equals(category.getName())) {
-            throw new ConflictException("Same category name");
+//            throw new ConflictException("Same category name");
+            return CategoryMapper.toCategoryDto(category);
         }
         category.setName(categoryDto.getName());
         categoriesRepository.save(category);
