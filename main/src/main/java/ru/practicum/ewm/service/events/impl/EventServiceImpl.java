@@ -12,6 +12,7 @@ import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.EventShortDto;
 import ru.practicum.ewm.model.requests.RequestStatus;
 import ru.practicum.ewm.repository.events.EventsRepository;
+import ru.practicum.ewm.repository.events.util.EventUtil;
 import ru.practicum.ewm.repository.requests.RequestsRepository;
 import ru.practicum.ewm.service.categories.CategoriesService;
 import ru.practicum.ewm.service.events.EventService;
@@ -21,6 +22,7 @@ import ru.practicum.ewm.statistic.StatService;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -101,6 +103,6 @@ public class EventServiceImpl implements EventService {
         fullEventDto.setConfirmedRequests(requestsRepository.findAllByEventIdAndStatus(event.getId(),
                 RequestStatus.CONFIRMED).size());
         statService.createView(HitMapper.toEndpointHit("ewm-main-service", request));
-        return fullEventDto;
+        return EventUtil.getViews(Collections.singletonList(fullEventDto), statService).get(0);
     }
 }

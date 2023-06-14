@@ -30,7 +30,7 @@ public class EventUtil {
                         MIN_TIME,
                         MAX_TIME,
                         new ArrayList<>(views.keySet()),
-                        false)
+                        true)
                 .getBody();
         List<ViewStatsDTO> viewStatsDtos = new ObjectMapper().convertValue(responseBody, new TypeReference<>() {
         });
