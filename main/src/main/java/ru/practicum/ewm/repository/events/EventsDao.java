@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventsDao {
     private final EntityManager entityManager;
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public List<Event> findEvents(List<Integer> users,
                                   List<State> states,
