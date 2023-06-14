@@ -76,7 +76,7 @@ public interface EventsPrivateController {
     @PatchMapping("{eventId}")
     EventFullDto updateEvent(@Positive @PathVariable Long userId,
                              @Positive @PathVariable Long eventId,
-                             @RequestBody UpdateEventUserRequest updateEventUserRequest);
+                             @Valid @RequestBody UpdateEventUserRequest updateEventUserRequest);
 
     /**
      * В случае, если по заданным фильтрам не найдено ни одной заявки, возвращает пустой список

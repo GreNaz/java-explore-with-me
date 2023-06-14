@@ -9,6 +9,7 @@ import ru.practicum.ewm.model.events.dto.*;
 import ru.practicum.ewm.model.requests.dto.ParticipationRequestDto;
 import ru.practicum.ewm.service.events.EventsPrivateService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class EventsPrivateControllerImpl implements EventsPrivateController {
     }
 
 
-    public EventFullDto updateEvent(@Positive Long userId, @Positive Long eventId,
+    public EventFullDto updateEvent(Long userId, Long eventId,
                                     UpdateEventUserRequest updateEventUserRequest) {
         return service.updateEvent(userId, eventId, updateEventUserRequest);
     }
