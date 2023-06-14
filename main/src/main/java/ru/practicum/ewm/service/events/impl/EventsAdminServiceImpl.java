@@ -75,31 +75,32 @@ public class EventsAdminServiceImpl implements EventsAdminService {
             throw new BadRequestException("Date in the past");
 
         }
-
-        switch (event.getState()) {
-            case PUBLISHED:
-                if (updateEventAdminRequest.getStateAction().equals(PUBLISH_EVENT)) {
-                    throw new ConflictException("Event is already published");
-                }
-                if (updateEventAdminRequest.getStateAction().equals(REJECT_EVENT)) {
-                    throw new ConflictException("Event is published. You can't reject it");
-                }
-                break;
-            case CANCELED:
-                if (updateEventAdminRequest.getStateAction().equals(PUBLISH_EVENT)) {
-                    throw new ConflictException("Event is canceled");
-                }
-                break;
-            case PENDING:
-                if (updateEventAdminRequest.getStateAction().equals(PUBLISH_EVENT)) {
-                    event.setState(PUBLISHED);
-                }
-                if (updateEventAdminRequest.getStateAction().equals(REJECT_EVENT)) {
-                    event.setState(CANCELED);
-                }
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + updateEventAdminRequest.getStateAction());
+        if (updateEventAdminRequest.getStateAction() != null) {
+            switch (event.getState()) {
+                case PUBLISHED:
+                    if (updateEventAdminRequest.getStateAction().equals(PUBLISH_EVENT)) {
+                        throw new ConflictException("Event is already published");
+                    }
+                    if (updateEventAdminRequest.getStateAction().equals(REJECT_EVENT)) {
+                        throw new ConflictException("Event is published. You can't reject it");
+                    }
+                    break;
+                case CANCELED:
+                    if (updateEventAdminRequest.getStateAction().equals(PUBLISH_EVENT)) {
+                        throw new ConflictException("Event is canceled");
+                    }
+                    break;
+                case PENDING:
+                    if (updateEventAdminRequest.getStateAction().equals(PUBLISH_EVENT)) {
+                        event.setState(PUBLISHED);
+                    }
+                    if (updateEventAdminRequest.getStateAction().equals(REJECT_EVENT)) {
+                        event.setState(CANCELED);
+                    }
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + updateEventAdminRequest.getStateAction());
+            }
         }
 
         if (updateEventAdminRequest.getCategory() != null) {

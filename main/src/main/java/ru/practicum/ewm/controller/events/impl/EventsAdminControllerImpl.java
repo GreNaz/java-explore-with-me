@@ -1,6 +1,7 @@
 package ru.practicum.ewm.controller.events.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.controller.events.EventsAdminController;
 import ru.practicum.ewm.model.events.State;
@@ -11,6 +12,7 @@ import ru.practicum.ewm.service.events.EventsAdminService;
 import java.util.List;
 
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class EventsAdminControllerImpl implements EventsAdminController {

@@ -8,6 +8,7 @@ import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.UpdateEventAdminRequest;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
