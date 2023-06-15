@@ -22,5 +22,7 @@ public interface CompilationService {
 
     List<CompilationDto> getCompilations(Boolean pinned, Pageable pageable);
 
+    List<CompilationDto> getCompilations(Pageable pageable);
+
     CompilationDto getCompilation(Integer compId);
 }

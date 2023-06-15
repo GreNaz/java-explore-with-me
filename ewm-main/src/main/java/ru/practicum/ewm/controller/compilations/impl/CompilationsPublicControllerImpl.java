@@ -17,10 +17,10 @@ public class CompilationsPublicControllerImpl implements CompilationsPublicContr
     private final CompilationService service;
 
     public List<CompilationDto> getCompilations(Boolean pinned, Integer from, Integer size) {
-        if (pinned == null) {
-            pinned = false;
-        }
         Pageable pageable = PageRequest.of(from, size);
+        if (pinned == null) {
+            return service.getCompilations(pageable);
+        }
         return service.getCompilations(pinned, pageable);
     }
 

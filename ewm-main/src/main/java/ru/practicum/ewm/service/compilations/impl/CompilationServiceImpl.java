@@ -60,6 +60,14 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     @Override
+    public List<CompilationDto> getCompilations(Pageable pageable) {
+        List<Compilation> compilations = compilationsRepository.findAllBy(pageable);
+        return compilations.stream()
+                .map(CompilationMapper::toCompilationDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public CompilationDto getCompilation(Integer compId) {
         Compilation compilation = compilationsRepository.findById(compId).orElseThrow(() ->
                 new NotFoundException("Compilation not found"));
