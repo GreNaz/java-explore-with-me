@@ -21,9 +21,6 @@ import java.util.List;
 public class StatClient {
     private final WebClient webClient;
 
-//    private static final String HIT_ENDPOINT = "/hit";
-//    private static final String STATS_ENDPOINT = "/stats";
-
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public void save(EndpointHitDTO endpointHitDTO) {

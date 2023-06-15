@@ -18,7 +18,7 @@ public class WebClientConfig {
     private static final int TIMEOUT = 5000;
 
     @Bean
-    public WebClient webClientWithTimeout(@Value("${ewm-service.url}") String serverUrl) {
+    public WebClient webClientWithTimeout(@Value("${ewm-server.url}") String serverUrl) {
         final HttpClient httpClient = HttpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, TIMEOUT)
                 .responseTimeout(Duration.ofMillis(TIMEOUT))
