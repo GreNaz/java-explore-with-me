@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @UtilityClass
 public class CompilationMapper {
-    public static Compilation toCompilation(NewCompilationDto newCompilationDto, List<Event> events) {
+    public Compilation toCompilation(NewCompilationDto newCompilationDto, List<Event> events) {
         if (newCompilationDto.getPinned() == null) {
             newCompilationDto.setPinned(false);
         }
@@ -22,7 +22,7 @@ public class CompilationMapper {
                 .events(events).build();
     }
 
-    public static CompilationDto toCompilationDto(Compilation compilation) {
+    public CompilationDto toCompilationDto(Compilation compilation) {
         List<EventShortDto> shortEvents = compilation.getEvents().stream()
                 .map(EventMapper.EVENT_MAPPER::toEventShortDto)
                 .collect(Collectors.toList());
