@@ -3,6 +3,7 @@ package ru.practicum.ewm.repository.events.util;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dto.ViewStatsDTO;
+import lombok.experimental.UtilityClass;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.EventShortDto;
 import ru.practicum.ewm.model.requests.ParticipationRequest;
@@ -17,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+@UtilityClass
 public class EventUtil {
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     public static final LocalDateTime MAX_TIME = toTime("5000-01-01 00:00:00");
