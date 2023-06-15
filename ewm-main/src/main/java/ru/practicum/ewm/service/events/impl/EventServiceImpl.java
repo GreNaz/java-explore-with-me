@@ -14,7 +14,6 @@ import ru.practicum.ewm.model.requests.RequestStatus;
 import ru.practicum.ewm.repository.events.EventsRepository;
 import ru.practicum.ewm.repository.events.util.EventUtil;
 import ru.practicum.ewm.repository.requests.RequestsRepository;
-import ru.practicum.ewm.service.categories.CategoriesService;
 import ru.practicum.ewm.service.events.EventService;
 import ru.practicum.ewm.statistic.HitMapper;
 import ru.practicum.ewm.statistic.StatService;
@@ -30,13 +29,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private static final LocalDateTime MAX_TIME = LocalDateTime.MAX;
-    private static final LocalDateTime MIN_TIME = LocalDateTime.MIN;
-
     private final EventsRepository eventsRepository;
     private final RequestsRepository requestsRepository;
     private final StatService statService;
-    private final CategoriesService categoriesService;
 
     @Override
     public List<EventShortDto> getEvents(String text,
@@ -48,7 +43,7 @@ public class EventServiceImpl implements EventService {
                                          Boolean onlyAvailable,
                                          Pageable pageable,
                                          HttpServletRequest request) {
-        if (!categories.isEmpty()
+        if (categories != null && !categories.isEmpty()
                 && categories.stream().sorted().collect(Collectors.toList()).get(0) <= 0) {
             throw new BadRequestException("bad category Id");
         }
