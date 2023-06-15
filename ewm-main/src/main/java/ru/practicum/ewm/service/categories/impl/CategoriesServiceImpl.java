@@ -35,7 +35,6 @@ public class CategoriesServiceImpl implements CategoriesService {
     public CategoryDto updateCategory(CategoryDto categoryDto, Integer catId) {
         Category category = checkCategoryExist(catId);
         if (categoryDto.getName().equals(category.getName())) {
-//            throw new ConflictException("Same category name");
             return CategoryMapper.toCategoryDto(category);
         }
         category.setName(categoryDto.getName());

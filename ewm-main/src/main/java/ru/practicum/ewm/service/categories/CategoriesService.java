@@ -1,14 +1,12 @@
 package ru.practicum.ewm.service.categories;
 
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 import ru.practicum.ewm.model.categories.dto.CategoryDto;
 import ru.practicum.ewm.model.categories.dto.NewCategoryDto;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Service
 public interface CategoriesService {
     @Transactional
     CategoryDto setCategory(NewCategoryDto newCategoryDto);
