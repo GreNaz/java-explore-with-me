@@ -7,6 +7,8 @@ import ru.practicum.ewm.model.users.dto.NewUserRequest;
 import ru.practicum.ewm.model.users.dto.UserDto;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 /**
@@ -31,8 +33,8 @@ public interface UsersAdminController {
      */
     @GetMapping()
     List<UserDto> getUsers(@RequestParam(required = false) List<Long> ids,
-                           @RequestParam(defaultValue = "0") Integer from,
-                           @RequestParam(defaultValue = "10") Integer size);
+                           @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
+                           @Positive @RequestParam(defaultValue = "10") Integer size);
 
     /**
      * @param newUserRequest Данные добавляемого пользователя
