@@ -9,7 +9,6 @@ import ru.practicum.ewm.model.users.dto.NewUserRequest;
 import ru.practicum.ewm.model.users.dto.UserDto;
 import ru.practicum.ewm.service.users.UsersService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,8 +23,8 @@ public class UsersAdminControllerImpl implements UsersAdminController {
 
     public List<UserDto> getUsers(List<Long> ids, Integer from, Integer size) {
         Pageable pageable = PageRequest.of(from, size);
-        if (ids == null) {
-            ids = new ArrayList<>();
+        if (ids == null || ids.isEmpty()) {
+            return service.getUsers(pageable);
         }
         return service.getUsers(ids, pageable);
     }
