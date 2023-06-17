@@ -4,7 +4,7 @@ import lombok.*;
 import ru.practicum.ewm.model.events.Event;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -25,6 +25,6 @@ public class Compilation {
 
     @ManyToMany
     @JoinColumn(name = "events_id")
-    private List<Event> events;
+    private Set<Event> events;
 
 }
