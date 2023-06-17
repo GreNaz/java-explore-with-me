@@ -7,6 +7,7 @@ import ru.practicum.ewm.model.events.Event;
 import ru.practicum.ewm.model.events.EventMapper;
 import ru.practicum.ewm.model.events.dto.EventShortDto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,9 @@ public class CompilationMapper {
     public Compilation toCompilation(NewCompilationDto newCompilationDto, List<Event> events) {
         if (newCompilationDto.getPinned() == null) {
             newCompilationDto.setPinned(false);
+        }
+        if (newCompilationDto.getEvents() == null) {
+            newCompilationDto.setEvents(new ArrayList<>());
         }
         return Compilation.builder()
                 .title(newCompilationDto.getTitle())
