@@ -63,9 +63,6 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
 
         newEventDto.setLocation(locationRepository.save(newEventDto.getLocation()));
 
-        if (newEventDto.getPaid() == null) {
-            newEventDto.setPaid(false);
-        }
         if (newEventDto.getParticipantLimit() == null) {
             newEventDto.setParticipantLimit(0);
         }
