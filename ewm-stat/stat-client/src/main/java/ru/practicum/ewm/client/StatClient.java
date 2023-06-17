@@ -24,7 +24,7 @@ public class StatClient {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public void save(EndpointHitDTO endpointHitDTO) {
-        log.error("Сохранение запроса на " + endpointHitDTO);
+        log.info("Save request to - {}", endpointHitDTO);
         webClient.post()
                 .uri("/hit")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -45,7 +45,7 @@ public class StatClient {
                                           LocalDateTime end,
                                           List<String> uris,
                                           boolean unique) {
-        log.error("Получение статистики запроса(ов) " + uris);
+        log.info("Get statistics from - {} ", uris);
 
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder

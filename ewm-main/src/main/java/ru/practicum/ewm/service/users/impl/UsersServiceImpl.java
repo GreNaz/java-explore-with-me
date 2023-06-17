@@ -3,6 +3,7 @@ package ru.practicum.ewm.service.users.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.practicum.ewm.model.errors.BadRequestException;
 import ru.practicum.ewm.model.users.User;
 import ru.practicum.ewm.model.users.UserMapper;
 import ru.practicum.ewm.model.users.dto.NewUserRequest;
@@ -42,7 +43,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public void deleteUser(Long userId) {
-        //проверить наличие пользователя?
+        repository.findById(userId).orElseThrow(() -> new BadRequestException("User not found"));
         repository.deleteById(userId);
     }
 }
