@@ -37,8 +37,8 @@ public class CompilationServiceImpl implements CompilationService {
 
     @Override
     public CompilationDto updateCompilation(UpdateCompilationRequest updateCompilationRequest, Integer compId) {
-        Compilation compilation = compilationsRepository.findById(compId).orElseThrow();
-        if (updateCompilationRequest.getEvents() != null ) {
+        Compilation compilation = compilationsRepository.findById(compId).orElseThrow(() -> new NotFoundException("Compilation not found"));
+        if (updateCompilationRequest.getEvents() != null) {
             compilation.setEvents(eventsRepository.findByIds(updateCompilationRequest.getEvents()));
         }
         if (updateCompilationRequest.getPinned() != null) {
@@ -69,8 +69,7 @@ public class CompilationServiceImpl implements CompilationService {
 
     @Override
     public CompilationDto getCompilation(Integer compId) {
-        Compilation compilation = compilationsRepository.findById(compId).orElseThrow(() ->
-                new NotFoundException("Compilation not found"));
+        Compilation compilation = compilationsRepository.findById(compId).orElseThrow(() -> new NotFoundException("Compilation not found"));
         return CompilationMapper.toCompilationDto(compilation);
     }
 }
