@@ -3,7 +3,6 @@ package ru.practicum.ewm.service.events.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.practicum.ewm.model.location.Location;
 import ru.practicum.ewm.model.categories.Category;
 import ru.practicum.ewm.model.errors.BadRequestException;
 import ru.practicum.ewm.model.errors.ConflictException;
@@ -12,6 +11,7 @@ import ru.practicum.ewm.model.events.Event;
 import ru.practicum.ewm.model.events.EventMapper;
 import ru.practicum.ewm.model.events.State;
 import ru.practicum.ewm.model.events.dto.*;
+import ru.practicum.ewm.model.location.Location;
 import ru.practicum.ewm.model.requests.ParticipationRequest;
 import ru.practicum.ewm.model.requests.RequestStatus;
 import ru.practicum.ewm.model.requests.RequestsMapper;
@@ -173,7 +173,7 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
         Integer confirmedRequests = requestsRepository.findByEventIdConfirmed(eventId).size();
         List<ParticipationRequest> requests = requestsRepository.findByEventIdAndRequestsIds(eventId,
                 eventRequestStatusUpdateRequest.getRequestIds());
-        if (Objects.equals(eventRequestStatusUpdateRequest.getStatus(), RequestStatus.CONFIRMED.name())
+        if (eventRequestStatusUpdateRequest.getStatus().name().equalsIgnoreCase(RequestStatus.CONFIRMED.name())
                 && confirmedRequests + requests.size() > event.getParticipantLimit()) {
             requests.forEach(request -> request.setStatus(RequestStatus.REJECTED));
             List<ParticipationRequestDto> requestDto = requests.stream()
@@ -183,7 +183,7 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
             requestsRepository.saveAll(requests);
             throw new ConflictException("Requests limit exceeded");
         }
-        if (eventRequestStatusUpdateRequest.getStatus().equalsIgnoreCase(RequestStatus.REJECTED.name())) {
+        if (eventRequestStatusUpdateRequest.getStatus().name().equalsIgnoreCase(RequestStatus.REJECTED.name())) {
             requests.forEach(request -> {
                 if (request.getStatus().equals(RequestStatus.CONFIRMED)) {
                     throw new ConflictException("You can't reject confirmed request");
@@ -195,7 +195,7 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
                     .collect(Collectors.toList());
             requestUpdateDto.setRejectedRequests(requestDto);
             requestsRepository.saveAll(requests);
-        } else if (eventRequestStatusUpdateRequest.getStatus().equalsIgnoreCase(RequestStatus.CONFIRMED.name())
+        } else if (eventRequestStatusUpdateRequest.getStatus().name().equalsIgnoreCase(RequestStatus.CONFIRMED.name())
                 && eventRequestStatusUpdateRequest.getRequestIds().size() <= event.getParticipantLimit() - confirmedRequests) {
             requests.forEach(request -> request.setStatus(RequestStatus.CONFIRMED));
             List<ParticipationRequestDto> requestDto = requests.stream()
