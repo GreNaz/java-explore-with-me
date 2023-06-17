@@ -3,6 +3,7 @@ package ru.practicum.ewm.controller.errors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -10,13 +11,20 @@ import ru.practicum.ewm.model.errors.BadRequestException;
 import ru.practicum.ewm.model.errors.ConflictException;
 import ru.practicum.ewm.model.errors.NotFoundException;
 
+import javax.validation.ConstraintViolationException;
+
 @Slf4j
 @RestControllerAdvice
 public class ErrorHandler {
 
-    @ExceptionHandler
+    @ExceptionHandler(
+            {
+                    MethodArgumentNotValidException.class,
+                    BadRequestException.class,
+                    ConstraintViolationException.class
+            })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handlerBadRequest(final BadRequestException e) {
+    public ErrorResponse handlerBadRequest(final RuntimeException e) {
         log.warn("400 {}", e.getMessage(), e);
         return new ErrorResponse("Object not available 400 ", e.getMessage());
     }
@@ -35,11 +43,11 @@ public class ErrorHandler {
         return new ErrorResponse("No valid data 409", e.getMessage());
     }
 
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handlerThrowable(final Throwable e) {
-        log.warn("500 {}", e.getMessage(), e);
-        return new ErrorResponse("Internal server error 500", e.getMessage());
-    }
+//    @ExceptionHandler
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    public ErrorResponse handlerThrowable(final Throwable e) {
+//        log.warn("500 {}", e.getMessage(), e);
+//        return new ErrorResponse("Internal server error 500", e.getMessage());
+//    }
 }
 
