@@ -3,7 +3,7 @@ package ru.practicum.ewm.service.events.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.practicum.ewm.model.Location;
+import ru.practicum.ewm.model.location.Location;
 import ru.practicum.ewm.model.categories.Category;
 import ru.practicum.ewm.model.errors.BadRequestException;
 import ru.practicum.ewm.model.errors.ConflictException;

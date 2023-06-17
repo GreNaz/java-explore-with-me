@@ -1,7 +1,7 @@
 package ru.practicum.ewm.model.events;
 
 import lombok.*;
-import ru.practicum.ewm.model.Location;
+import ru.practicum.ewm.model.location.Location;
 import ru.practicum.ewm.model.categories.Category;
 import ru.practicum.ewm.model.users.User;
 

@@ -2,8 +2,9 @@ package ru.practicum.ewm.model.events.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import ru.practicum.ewm.model.Location;
+import ru.practicum.ewm.model.location.Location;
 import ru.practicum.ewm.model.categories.dto.CategoryDto;
+import ru.practicum.ewm.model.location.LocationDto;
 import ru.practicum.ewm.model.users.dto.UserShortDto;
 
 import javax.validation.constraints.NotNull;
@@ -26,7 +27,7 @@ public class EventFullDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime eventDate; //Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
     private UserShortDto initiator;
-    private Location location;
+    private LocationDto location;
     @NotNull
     private Boolean paid; //Нужно ли оплачивать участие
     private Integer participantLimit; //Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
