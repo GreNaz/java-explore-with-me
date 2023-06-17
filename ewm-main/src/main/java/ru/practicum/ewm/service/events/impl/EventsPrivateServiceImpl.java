@@ -63,10 +63,6 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
 
         newEventDto.setLocation(locationRepository.save(newEventDto.getLocation()));
 
-        if (newEventDto.getParticipantLimit() == null) {
-            newEventDto.setParticipantLimit(0);
-        }
-
         Event eventAfterMapping = EVENT_MAPPER.toEvent(initiator, category, newEventDto);
 
         Event event = eventsRepository.save(eventAfterMapping);

@@ -37,6 +37,6 @@ public class NewEventDto {
     private String title; //Заголовок события
     private boolean paid; //Нужно ли оплачивать участие в событии
     @PositiveOrZero
-    private Integer participantLimit; //Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
+    private int participantLimit = 0; //Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
     private boolean requestModeration = true; //Нужна ли пре-модерация заявок на участие. Если true, то все заявки будут ожидать подтверждения инициатором события. Если false - то будут подтверждаться автоматически.
 }
