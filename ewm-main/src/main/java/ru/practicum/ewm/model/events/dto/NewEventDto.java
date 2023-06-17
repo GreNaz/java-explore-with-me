@@ -1,9 +1,12 @@
 package ru.practicum.ewm.model.events.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jdk.jfr.Category;
 import lombok.*;
 import ru.practicum.ewm.model.location.Location;
+import ru.practicum.ewm.model.location.LocationDto;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
@@ -18,6 +21,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Valid
 public class NewEventDto {
     @NotBlank
     @Size(max = 2000, min = 20)
@@ -31,7 +35,7 @@ public class NewEventDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime eventDate; //Дата и время на которые намечено событие. Дата и время указываются в формате "yyyy-MM-dd HH:mm:ss"
     @NotNull
-    private Location location;
+    private LocationDto location;
     @NotNull
     @Size(min = 3, max = 120)
     private String title; //Заголовок события

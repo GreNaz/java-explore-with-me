@@ -12,6 +12,7 @@ import ru.practicum.ewm.model.events.EventMapper;
 import ru.practicum.ewm.model.events.State;
 import ru.practicum.ewm.model.events.dto.*;
 import ru.practicum.ewm.model.location.Location;
+import ru.practicum.ewm.model.location.LocationMapper;
 import ru.practicum.ewm.model.requests.ParticipationRequest;
 import ru.practicum.ewm.model.requests.RequestStatus;
 import ru.practicum.ewm.model.requests.RequestsMapper;
@@ -61,7 +62,9 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
         Category category = categoriesRepository.findById(newEventDto.getCategory()).orElseThrow(
                 () -> new NotFoundException("Category with id = " + newEventDto.getCategory() + "not found"));
 
-        newEventDto.setLocation(locationRepository.save(newEventDto.getLocation()));
+        Location location = locationRepository.save(LocationMapper.toLocation(newEventDto.getLocation()));
+
+        newEventDto.setLocation(LocationMapper.toLocationDto(location));
 
         Event eventAfterMapping = EVENT_MAPPER.toEvent(initiator, category, newEventDto);
 
