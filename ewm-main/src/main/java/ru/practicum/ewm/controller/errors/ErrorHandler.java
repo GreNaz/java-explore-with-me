@@ -18,11 +18,7 @@ import javax.validation.ConstraintViolationException;
 public class ErrorHandler {
 
     @ExceptionHandler(
-            {
-                    MethodArgumentNotValidException.class,
-                    BadRequestException.class,
-                    ConstraintViolationException.class
-            })
+            {MethodArgumentNotValidException.class, BadRequestException.class, ConstraintViolationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handlerBadRequest(final RuntimeException e) {
         log.warn("400 {}", e.getMessage(), e);
@@ -42,12 +38,5 @@ public class ErrorHandler {
         log.warn("409 {}", e.getMessage(), e);
         return new ErrorResponse("No valid data 409", e.getMessage());
     }
-
-//    @ExceptionHandler
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    public ErrorResponse handlerThrowable(final Throwable e) {
-//        log.warn("500 {}", e.getMessage(), e);
-//        return new ErrorResponse("Internal server error 500", e.getMessage());
-//    }
 }
 
