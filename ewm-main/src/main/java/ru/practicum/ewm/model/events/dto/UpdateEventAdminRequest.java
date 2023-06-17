@@ -5,6 +5,7 @@ import lombok.*;
 import ru.practicum.ewm.model.location.Location;
 import ru.practicum.ewm.model.events.AdminStateAction;
 
+import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -29,6 +30,7 @@ public class UpdateEventAdminRequest {
     private LocalDateTime eventDate; //  Новые дата и время на которые намечено событие. Дата и время указываются в формате "yyyy-MM-dd HH:mm:ss"
     private Location location;
     private Boolean paid; //  Новое значение флага о платности мероприятия
+    @PositiveOrZero
     private Integer participantLimit; //  Новый лимит пользователей
     private Boolean requestModeration; //  Нужна ли пре-модерация заявок на участие
     private AdminStateAction stateAction; //  Новое состояние события PUBLISH_EVENT, REJECT_EVENT
