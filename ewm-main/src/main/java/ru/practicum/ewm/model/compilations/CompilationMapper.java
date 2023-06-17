@@ -15,15 +15,13 @@ import java.util.stream.Collectors;
 @UtilityClass
 public class CompilationMapper {
     public Compilation toCompilation(NewCompilationDto newCompilationDto, Set<Event> events) {
-        if (newCompilationDto.getPinned() == null) {
-            newCompilationDto.setPinned(false);
-        }
+
         if (newCompilationDto.getEvents() == null) {
             newCompilationDto.setEvents(new ArrayList<>());
         }
         return Compilation.builder()
                 .title(newCompilationDto.getTitle())
-                .pinned(newCompilationDto.getPinned())
+                .pinned(newCompilationDto.isPinned())
                 .events(events).build();
     }
 

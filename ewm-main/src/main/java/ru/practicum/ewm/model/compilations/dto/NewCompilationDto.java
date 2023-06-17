@@ -18,7 +18,7 @@ public class NewCompilationDto {
 
     private List<Long> events; //Список идентификаторов событий входящих в подборку
 
-    private Boolean pinned; //Закреплена ли подборка на главной странице сайта
+    private boolean pinned; //Закреплена ли подборка на главной странице сайта
 
     @NotBlank
     @Size(max = 50)
