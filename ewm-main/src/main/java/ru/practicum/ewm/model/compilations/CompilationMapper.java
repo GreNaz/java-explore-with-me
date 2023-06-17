@@ -9,11 +9,12 @@ import ru.practicum.ewm.model.events.dto.EventShortDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @UtilityClass
 public class CompilationMapper {
-    public Compilation toCompilation(NewCompilationDto newCompilationDto, List<Event> events) {
+    public Compilation toCompilation(NewCompilationDto newCompilationDto, Set<Event> events) {
         if (newCompilationDto.getPinned() == null) {
             newCompilationDto.setPinned(false);
         }

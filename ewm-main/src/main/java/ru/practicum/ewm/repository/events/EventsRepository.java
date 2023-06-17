@@ -10,6 +10,7 @@ import ru.practicum.ewm.model.events.State;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 public interface EventsRepository extends JpaRepository<Event, Long> {
@@ -19,7 +20,7 @@ public interface EventsRepository extends JpaRepository<Event, Long> {
 
     @Query("select event from Event event " +
             "where event.id IN (:ids)")
-    List<Event> findByIds(@Param("ids") List<Long> ids);
+    Set<Event> findByIds(@Param("ids") List<Long> ids);
 
     @Query("SELECT e " +
             "FROM Event AS e " +

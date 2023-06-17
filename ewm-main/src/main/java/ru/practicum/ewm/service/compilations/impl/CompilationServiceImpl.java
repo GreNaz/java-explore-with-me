@@ -15,6 +15,7 @@ import ru.practicum.ewm.repository.events.EventsRepository;
 import ru.practicum.ewm.service.compilations.CompilationService;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,7 +26,7 @@ public class CompilationServiceImpl implements CompilationService {
 
     @Override
     public CompilationDto setCompilation(NewCompilationDto newCompilationDto) {
-        List<Event> events = eventsRepository.findByIds(newCompilationDto.getEvents());
+        Set<Event> events = eventsRepository.findByIds(newCompilationDto.getEvents());
         return CompilationMapper.toCompilationDto(compilationsRepository.save(CompilationMapper.toCompilation(newCompilationDto, events)));
     }
 
