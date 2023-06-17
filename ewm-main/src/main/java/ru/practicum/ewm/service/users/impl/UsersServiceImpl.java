@@ -31,7 +31,6 @@ public class UsersServiceImpl implements UsersService {
         return repository.findAllByIdIn(ids, pageable).stream()
                 .map(UserMapper::toUserDto)
                 .collect(Collectors.toList());
-
     }
 
     @Override
