@@ -38,13 +38,13 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     public CompilationDto updateCompilation(UpdateCompilationRequest updateCompilationRequest, Integer compId) {
         Compilation compilation = compilationsRepository.findById(compId).orElseThrow();
-        if (updateCompilationRequest.getEvents() != null) {
+        if (updateCompilationRequest.getEvents() != null ) {
             compilation.setEvents(eventsRepository.findByIds(updateCompilationRequest.getEvents()));
         }
         if (updateCompilationRequest.getPinned() != null) {
             compilation.setPinned(updateCompilationRequest.getPinned());
         }
-        if (updateCompilationRequest.getTitle() != null) {
+        if (updateCompilationRequest.getTitle() != null && !updateCompilationRequest.getTitle().isBlank()) {
             compilation.setTitle(updateCompilationRequest.getTitle());
         }
         compilationsRepository.save(compilation);
