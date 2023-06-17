@@ -17,8 +17,7 @@ import javax.validation.ConstraintViolationException;
 @RestControllerAdvice
 public class ErrorHandler {
 
-    @ExceptionHandler(
-            {MethodArgumentNotValidException.class, BadRequestException.class, ConstraintViolationException.class})
+    @ExceptionHandler({MethodArgumentNotValidException.class, BadRequestException.class, ConstraintViolationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handlerBadRequest(final RuntimeException e) {
         log.warn("400 {}", e.getMessage(), e);
