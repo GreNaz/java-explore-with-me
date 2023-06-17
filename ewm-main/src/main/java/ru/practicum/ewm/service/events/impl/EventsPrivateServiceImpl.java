@@ -66,9 +66,6 @@ public class EventsPrivateServiceImpl implements EventsPrivateService {
         if (newEventDto.getParticipantLimit() == null) {
             newEventDto.setParticipantLimit(0);
         }
-        if (newEventDto.getRequestModeration() == null) {
-            newEventDto.setRequestModeration(true);
-        }
 
         Event eventAfterMapping = EVENT_MAPPER.toEvent(initiator, category, newEventDto);
 
