@@ -12,6 +12,7 @@ import ru.practicum.ewm.model.events.EventMapper;
 import ru.practicum.ewm.model.events.State;
 import ru.practicum.ewm.model.events.dto.EventFullDto;
 import ru.practicum.ewm.model.events.dto.UpdateEventAdminRequest;
+import ru.practicum.ewm.model.requests.ParticipationRequest;
 import ru.practicum.ewm.repository.categories.CategoriesRepository;
 import ru.practicum.ewm.repository.events.EventsDao;
 import ru.practicum.ewm.repository.events.EventsRepository;
@@ -22,7 +23,9 @@ import ru.practicum.ewm.service.events.EventsAdminService;
 import ru.practicum.ewm.statistic.StatService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static ru.practicum.ewm.model.events.AdminStateAction.PUBLISH_EVENT;
@@ -57,10 +60,22 @@ public class EventsAdminServiceImpl implements EventsAdminService {
                 .limit(size)
                 .map(EventMapper.EVENT_MAPPER::toEventFullDto)
                 .collect(Collectors.toList());
-
-        EventUtil.getConfirmedRequests(fullEventDtoList, requestsRepository);
-
-        return EventUtil.getViews(fullEventDtoList, statService);
+        List<Long> ids = fullEventDtoList.stream().map(EventFullDto::getId).collect(Collectors.toList());
+        List<ParticipationRequest> requests = requestsRepository.findConfirmedToListEvents(ids);
+        EventUtil.getConfirmedRequests(fullEventDtoList,requests);
+        LocalDateTime min = fullEventDtoList.stream()
+                .map(EventFullDto::getPublishedOn)
+                .min(LocalDateTime::compareTo)
+                .orElseThrow(() -> new BadRequestException("Bad input events"));
+        Map<String, EventFullDto> views = fullEventDtoList.stream().collect(Collectors.toMap(fullEventDto
+                -> "/events/" + fullEventDto.getId(), fullEventDto -> fullEventDto));
+        Object responseBody = statService.getViewStats(
+                        min,
+                        LocalDateTime.now(),
+                        new ArrayList<>(views.keySet()),
+                        true)
+                .getBody();
+        return EventUtil.getViews(responseBody,views);
     }
 
     @Override

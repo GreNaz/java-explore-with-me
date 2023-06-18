@@ -21,9 +21,11 @@ import ru.practicum.ewm.statistic.StatService;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -98,6 +100,15 @@ public class EventServiceImpl implements EventService {
         fullEventDto.setConfirmedRequests(requestsRepository.findAllByEventIdAndStatus(event.getId(),
                 RequestStatus.CONFIRMED).size());
         statService.createView(HitMapper.toEndpointHit("ewm-main-service", request));
-        return EventUtil.getViews(Collections.singletonList(fullEventDto), statService).get(0);
+        LocalDateTime min = fullEventDto.getPublishedOn();
+        Map<String, EventFullDto> views = Stream.of(fullEventDto).collect(Collectors.toMap(fullEventDTO
+                -> "/events/" + fullEventDto.getId(), fullEventDTO -> fullEventDto));
+        Object responseBody = statService.getViewStats(
+                        min,
+                        LocalDateTime.now(),
+                        new ArrayList<>(views.keySet()),
+                        true)
+                .getBody();
+        return EventUtil.getViews(responseBody, views).get(0);
     }
 }
