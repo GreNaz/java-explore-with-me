@@ -16,24 +16,25 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class EventFullDto {
     private Long id;
-    private String annotation; //Краткое описание
+    private String annotation;
     @NotNull
     private CategoryDto category;
-    private Integer confirmedRequests;  //Количество одобренных заявок на участие в данном событии
-    private LocalDateTime createdOn; //Дата и время создания события (в формате "yyyy-MM-dd HH:mm:ss")
-    private String description; //Полное описание события
+    private Integer confirmedRequests;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdOn;
+    private String description;
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime eventDate; //Дата и время на которые намечено событие (в формате "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime eventDate;
     private UserShortDto initiator;
     private LocationDto location;
     @NotNull
-    private Boolean paid; //Нужно ли оплачивать участие
-    private Integer participantLimit; //Ограничение на количество участников. Значение 0 - означает отсутствие ограничения
-    private LocalDateTime publishedOn; //Дата и время публикации события (в формате "yyyy-MM-dd HH:mm:ss")
-    private Boolean requestModeration; //Нужна ли пре-модерация заявок на участие
-    private String state; //Список состояний жизненного цикла события
+    private Boolean paid;
+    private Integer participantLimit;
+    private LocalDateTime publishedOn;
+    private Boolean requestModeration;
+    private String state;
     @NotNull
-    private String title; //Заголовок
-    private Long views; //Количество просмотрев события
+    private String title;
+    private Long views;
 }
