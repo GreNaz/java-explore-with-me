@@ -58,8 +58,7 @@ public class EventServiceImpl implements EventService {
             end = LocalDateTime.parse(rangeEnd, FORMATTER);
         }
         if (text == null) text = "";
-        List<Event> events = eventsRepository.findByParamsOrderByDate(
-                text.toLowerCase(),
+        List<Event> events = eventsRepository.findByParamsOrderByDate(text.toLowerCase(),
                 List.of(State.PUBLISHED),
                 categories,
                 paid,
@@ -69,7 +68,7 @@ public class EventServiceImpl implements EventService {
         List<EventFullDto> fullEventDtoList = events.stream()
                 .map(EventMapper.EVENT_MAPPER::toEventFullDto)
                 .collect(Collectors.toList());
-        fullEventDtoList.forEach(event -> event.setConfirmedRequests(requestsRepository.findByEventIdConfirmed(event.getId()).size()));
+
         if (Boolean.TRUE.equals(onlyAvailable)) {
             fullEventDtoList = fullEventDtoList.stream()
                     .filter(event -> event.getParticipantLimit() <= event.getConfirmedRequests())

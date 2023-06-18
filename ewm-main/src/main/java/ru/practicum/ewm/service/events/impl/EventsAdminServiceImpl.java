@@ -62,7 +62,7 @@ public class EventsAdminServiceImpl implements EventsAdminService {
                 .collect(Collectors.toList());
         List<Long> ids = fullEventDtoList.stream().map(EventFullDto::getId).collect(Collectors.toList());
         List<ParticipationRequest> requests = requestsRepository.findConfirmedToListEvents(ids);
-        EventUtil.getConfirmedRequests(fullEventDtoList,requests);
+        EventUtil.getConfirmedRequests(fullEventDtoList, requests);
         LocalDateTime min = fullEventDtoList.stream()
                 .map(EventFullDto::getPublishedOn)
                 .min(LocalDateTime::compareTo)
@@ -75,7 +75,7 @@ public class EventsAdminServiceImpl implements EventsAdminService {
                         new ArrayList<>(views.keySet()),
                         true)
                 .getBody();
-        return EventUtil.getViews(responseBody,views);
+        return EventUtil.getViews(responseBody, views);
     }
 
     @Override

@@ -63,4 +63,9 @@ public class Event {
 
     @Column(nullable = false, length = 500)
     private String title;
+
+    @Transient
+    private int confirmedRequests;
+
+
 }
