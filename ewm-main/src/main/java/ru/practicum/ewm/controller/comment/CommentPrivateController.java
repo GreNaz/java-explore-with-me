@@ -10,23 +10,18 @@ import ru.practicum.ewm.model.comments.dto.CommentDtoUpdate;
 import ru.practicum.ewm.service.comment.CommentService;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 @Slf4j
 @RestController
 @RequestMapping("/events")
 @RequiredArgsConstructor
-public class CommentController {
+public class CommentPrivateController {
 
     private final CommentService commentService;
 
-    @GetMapping("{eventId}/comments")
-    @ResponseStatus(HttpStatus.OK)
-    public List<CommentDtoResponse> getCommentsByEventId(@PathVariable Long eventId,
-                                                         @RequestParam(required = false, defaultValue = "0", name = "from") Integer from,
-                                                         @RequestParam(required = false, defaultValue = "10", name = "size") Integer size) {
-        return commentService.getCommentsByEventId(eventId, from, size);
-    }
 
     @PostMapping("comments/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
@@ -46,15 +41,16 @@ public class CommentController {
     @GetMapping("comments/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public List<CommentDtoResponse> getCommentByAuthorId(@PathVariable Long userId,
-                                                         @RequestParam(required = false, defaultValue = "0", name = "from") Integer from,
-                                                         @RequestParam(required = false, defaultValue = "10", name = "size") Integer size) {
+                                                         @PositiveOrZero @RequestParam(defaultValue = "0", name = "from") Integer from,
+                                                         @Positive @RequestParam(defaultValue = "10", name = "size") Integer size) {
         return commentService.getCommentsByAuthorId(userId, from, size);
     }
 
-    @DeleteMapping("comments/{commentId}")
+    @DeleteMapping("comments/{commentId}/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteComment(@PathVariable Long commentId) {
-        commentService.deleteComment(commentId);
+    public void deleteComment(@PathVariable Long commentId,
+                              @PathVariable Long userId) {
+        commentService.deleteComment(commentId, userId);
     }
 
 }

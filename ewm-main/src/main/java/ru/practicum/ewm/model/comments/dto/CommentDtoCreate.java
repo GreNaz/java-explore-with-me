@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.extern.jackson.Jacksonized;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 public class CommentDtoCreate {
     @NotNull(message = "'eventId can not be null'")
     private Long eventId;
+    @Size(min = 3, max = 255)
     @NotNull(message = "'text' can not be null")
     private String text;
 }

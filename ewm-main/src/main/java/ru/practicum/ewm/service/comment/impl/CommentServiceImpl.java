@@ -13,6 +13,7 @@ import ru.practicum.ewm.model.comments.dto.CommentDtoCreate;
 import ru.practicum.ewm.model.comments.dto.CommentDtoResponse;
 import ru.practicum.ewm.model.comments.dto.CommentDtoUpdate;
 import ru.practicum.ewm.model.comments.dto.CommentMapper;
+import ru.practicum.ewm.model.errors.BadRequestException;
 import ru.practicum.ewm.model.errors.ConflictException;
 import ru.practicum.ewm.model.errors.NotFoundException;
 import ru.practicum.ewm.model.events.Event;
@@ -24,7 +25,6 @@ import ru.practicum.ewm.service.comment.CommentService;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -47,11 +47,15 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void deleteComment(Long commentId) {
+    public void deleteComment(Long commentId, Long userId) {
         log.info("deleting comment with id {}", commentId);
+        List<Comment> comments = commentRepository.findCommentsByAuthorId(userId, Pageable.unpaged());
         Comment comment = getCommentIfExists(commentId);
         if (comment.getCommentState() == CommentState.PUBLISHED) {
             throw new ConflictException("You can delete only not published comments");
+        }
+        if (!comments.contains(comment)) {
+            throw new BadRequestException("Unable to delete someone else's comment");
         }
         commentRepository.deleteById(commentId);
     }
@@ -103,9 +107,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     private Comment getCommentIfExists(Long userId, Long commentId) {
-        return Optional.of(commentRepository.findCommentByAuthorIdAndId(userId, commentId)).orElseThrow(() ->
-                new NotFoundException(String.format("Comment with id=%d from user with id=%d not found", userId,
-                        commentId)));
+        return commentRepository.findCommentByAuthorIdAndId(userId, commentId).orElseThrow(() ->
+                new NotFoundException(String.format("Comment with id=%d from user with id=%d not found", userId, commentId)));
     }
 
     private Event getEventIfExists(Long eventId) {

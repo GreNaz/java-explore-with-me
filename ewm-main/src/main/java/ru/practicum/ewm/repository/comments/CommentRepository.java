@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import ru.practicum.ewm.model.comments.Comment;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
@@ -23,5 +24,5 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @Query("SELECT c from Comment c " +
             "WHERE c.author.id = :authorId " +
             "and c.id = :commentId")
-    Comment findCommentByAuthorIdAndId(Long authorId, Long commentId);
+    Optional<Comment> findCommentByAuthorIdAndId(Long authorId, Long commentId);
 }
