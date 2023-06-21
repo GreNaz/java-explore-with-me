@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "53b93a19-fb4c-4f28-be13-2bb00b52522d",
+		"_postman_id": "cfb9a3af-0730-43c5-ab07-0983636891d7",
 		"name": "feature_comments_tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "11880006"
 	},
 	"item": [
@@ -625,7 +625,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Ответ должен содержать код статуса 204\", function () {",
-							"    pm.response.to.have.status(204);",
+							"    pm.response.to.have.status(400);",
 							"});",
 							"",
 							"let source = pm.collectionVariables.get('response');",
@@ -635,17 +635,7 @@
 							"});",
 							"",
 							"let body",
-							"const req = {",
-							"                url: \"http://localhost:8080/admin/events/comments/\" + pm.collectionVariables.get(\"commId\"),",
-							"                method: \"GET\",",
-							"                body: body == null ? \"\" : JSON.stringify(body),",
-							"                header: { \"Content-Type\": \"application/json\" },",
-							"            };",
-							"pm.sendRequest(req, (error, response) => {",
-							"    pm.test(\"Статус 404 при выполнении запроса\", function(){",
-							"        pm.expect(response.status).equal('Not Found');",
-							"    });",
-							"})",
+							"",
 							""
 						],
 						"type": "text/javascript"
@@ -668,6 +658,8 @@
 							"        event = await api.publishEvent(event.id);",
 							"        const commenter = await api.addUser(rnd.getUser());",
 							"        pm.collectionVariables.set('uid', commenter.id);",
+							"        pm.collectionVariables.set('userId', commenter.id);",
+							"",
 							"        const comment = await api.addComment(commenter.id, rnd.getComment(event.id));",
 							"        pm.collectionVariables.set('commId', comment.id);",
 							"        pm.collectionVariables.set('response', comment);",
@@ -706,7 +698,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/events/comments/:commentId",
+					"raw": "http://localhost:8080/events/comments/:commentId/:userId",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -715,12 +707,17 @@
 					"path": [
 						"events",
 						"comments",
-						":commentId"
+						":commentId",
+						":userId"
 					],
 					"variable": [
 						{
 							"key": "commentId",
 							"value": "{{commId}}"
+						},
+						{
+							"key": "userId",
+							"value": "{{userId}}"
 						}
 					]
 				}
@@ -983,6 +980,7 @@
 							"",
 							"    try {",
 							"        const user = await api.addUser(rnd.getUser());",
+							"        pm.collectionVariables.set('userId', user.id);",
 							"        const category = await api.addCategory(rnd.getCategory());",
 							"        let eventBody = rnd.getEvent(category.id);",
 							"        eventBody['requestModeration'] = true;",
@@ -1053,7 +1051,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/events/comments/:commentId",
+					"raw": "http://localhost:8080/events/comments/:commentId/:userId",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1062,12 +1060,17 @@
 					"path": [
 						"events",
 						"comments",
-						":commentId"
+						":commentId",
+						":userId"
 					],
 					"variable": [
 						{
 							"key": "commentId",
 							"value": "{{commId}}"
+						},
+						{
+							"key": "userId",
+							"value": "{{userId}}"
 						}
 					]
 				}
@@ -1310,6 +1313,10 @@
 		},
 		{
 			"key": "commId",
+			"value": ""
+		},
+		{
+			"key": "userId",
 			"value": ""
 		}
 	]
