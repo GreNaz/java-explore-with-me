@@ -25,6 +25,7 @@ import ru.practicum.ewm.service.comment.CommentService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -49,12 +50,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void deleteComment(Long commentId, Long userId) {
         log.info("deleting comment with id {}", commentId);
-        List<Comment> comments = commentRepository.findCommentsByAuthorId(userId, Pageable.unpaged());
         Comment comment = getCommentIfExists(commentId);
         if (comment.getCommentState() == CommentState.PUBLISHED) {
             throw new ConflictException("You can delete only not published comments");
         }
-        if (!comments.contains(comment)) {
+        if (!Objects.equals(comment.getAuthor().getId(), userId)) {
             throw new BadRequestException("Unable to delete someone else's comment");
         }
         commentRepository.deleteById(commentId);
